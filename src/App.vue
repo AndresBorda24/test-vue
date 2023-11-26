@@ -1,12 +1,12 @@
 <script setup>
 import Header from "@/components/header.vue";
-import RegistroForm from "./components/registro-form.vue";
+import InfoUsuario from "./components/info-usuario.vue";
 </script>
 
 <template>
   <Header />
   <main class="max-w-5xl p-2 mx-auto py-12">
-    <RegistroForm />
+    <InfoUsuario />
   </main>
 </template>
 
