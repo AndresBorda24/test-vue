@@ -2,24 +2,15 @@
 import { ref } from "vue"
 import { FwbInput, FwbButton } from 'flowbite-vue'
 import FormLabel from "@/components/form-label.vue"
+import { useInfoUsuarioStore } from "@/stores/InfoUsuario"
 
 const errors = ref({})
-const state  = ref({
-  nom1: null,
-  nom2: null,
-  ape1: null,
-  ape2: null,
-  cedula: null,
-  correo: null,
-  fech_nac: null,
-  password: null,
-  telefono: null,
-  direccion: null
-})
+// const InfoUsuarioStore =
+const { state } = useInfoUsuarioStore()
 
 function onSubmit() {
   errors.value = {}
-  console.log(state.value)
+  useInfoUsuarioStore().finish()
 }
 
 function onError() {
@@ -30,9 +21,9 @@ function onError() {
 <template>
   <p class="text-xl text-aso-primary text-center font-bold">Datos Usuario</p>
   <form
-    @submit.prevent="onSubmit"
-    id="form-info-usuario"
     autocomplete="off"
+    id="form-info-usuario"
+    @submit.prevent="onSubmit"
     class="bg-gray-50 px-10 py-7 border rounded shadow-xl flex flex-col gap-5 max-w-md mx-auto"
   >
     <form-label val="Cédula">
