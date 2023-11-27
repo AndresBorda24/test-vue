@@ -3,14 +3,21 @@ import { ref } from "vue"
 import { FwbInput, FwbButton } from 'flowbite-vue'
 import FormLabel from "@/components/form-label.vue"
 import { useInfoUsuarioStore } from "@/stores/InfoUsuario"
+import { useRouter } from "vue-router"
 
 const errors = ref({})
+const router = useRouter()
 // const InfoUsuarioStore =
 const { state } = useInfoUsuarioStore()
 
 function onSubmit() {
   errors.value = {}
   useInfoUsuarioStore().finish()
+
+  router.push({
+    name: 'info-planes'
+  })
+
 }
 
 function onError() {

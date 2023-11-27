@@ -94,6 +94,10 @@ function onSubmit() {
         <fwb-file-input id="file-drop" v-model="state.soporte" dropzone />
       </form-label>
 
+      <router-link :to="{ name: 'info-usuario' }">
+        Volver
+      </router-link>
+
       <fwb-button
         type="submit"
         color="yellow"
