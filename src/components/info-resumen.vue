@@ -1,10 +1,21 @@
 <script setup>
+import { onMounted, ref } from "vue"
+import { useRouter } from "vue-router"
+import { usePlanesStore } from "@/stores/Planes"
 import { useInfoPlanStore } from "@/stores/InfoPlan"
 import { useInfoUsuarioStore } from "@/stores/InfoUsuario"
-import { FwbListGroup, FwbListGroupItem } from 'flowbite-vue'
+import { FwbListGroup, FwbListGroupItem, FwbButton } from 'flowbite-vue'
 
+const plan = ref({})
+const router = useRouter()
 const { state: infoPlan }= useInfoPlanStore()
 const { state: infoUsuario } = useInfoUsuarioStore()
+
+onMounted(async () => {
+  const planes = await usePlanesStore().getPlanes()
+  console.log(planes)
+  plan.value = planes.find(p => p.id == infoPlan.plan )
+})
 </script>
 
 <template>
@@ -30,7 +41,15 @@ const { state: infoUsuario } = useInfoUsuarioStore()
     <hr class="my-6 border-gray-300">
 
     <p class="text-aso-primary font-bold">Plan:</p>
-    <fwb-list-group class="w-full">
+    <fwb-list-group class="w-full mb-6">
+      <fwb-list-group-item class="flex gap-3">
+        <span class="font-bold">Nombre:</span>
+        <span class="capitalize">Plan {{ plan.nombre }}</span>
+      </fwb-list-group-item>
+      <fwb-list-group-item class="flex gap-3">
+        <span class="font-bold">Valor:</span>
+        <span class="capitalize">${{ plan.valor_formatted }}</span>
+      </fwb-list-group-item>
       <fwb-list-group-item class="flex gap-3">
         <span class="font-bold">Medio de Pago:</span>
         <span class="capitalize">{{ infoPlan.medioPago }}</span>
@@ -40,5 +59,15 @@ const { state: infoUsuario } = useInfoUsuarioStore()
         <span>{{ infoPlan.referencia }}</span>
       </fwb-list-group-item>
     </fwb-list-group>
+
+    <div class="grid grid-cols-2 gap-3">
+      <fwb-button
+        color="dark"
+        tag="router-link"
+        class="text-center"
+        :href="router.resolve({ name: 'info-planes' }).href"
+      >Volver</fwb-button>
+      <fwb-button color="green">Confirmar!</fwb-button>
+    </div>
   </div>
 </template>

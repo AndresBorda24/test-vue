@@ -1,9 +1,11 @@
 <script setup>
+import { onMounted, ref } from "vue"
 import { useRouter } from "vue-router"
-import planes from "@/assets/planes.json"
+import { usePlanesStore } from "@/stores/Planes"
+import { useInfoPlanStore } from "@/stores/InfoPlan"
+
 import PlanCard from "@/components/plan-card.vue"
 import FormLabel from "@/components/form-label.vue"
-import { useInfoPlanStore } from "@/stores/InfoPlan"
 import { FwbInput, FwbFileInput, FwbButton } from 'flowbite-vue'
 
 // Icons xD
@@ -12,17 +14,19 @@ import CashIcon from "@/icons/cash.vue"
 import CardIcon from "@/icons/card.vue"
 
 const router = useRouter()
-
+const planes = ref(null)
+const { state } = useInfoPlanStore()
 const mediosDePago = {
   "Nequi": NequiIcon,
   "Efectivo": CashIcon,
   "Tarjeta": CardIcon
 }
 
-const { state } = useInfoPlanStore()
+onMounted(async () => {
+  planes.value = await usePlanesStore().getPlanes()
+})
 
 function onSubmit() {
-  console.log(state)
   router.push({
     name: 'info-confirmacion'
   })

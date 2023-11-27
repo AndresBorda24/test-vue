@@ -5,7 +5,7 @@ import Stepper from "@/components/stepper.vue"
 
 <template>
   <Header />
-  <main class="max-w-4xl p-2 mx-auto py-12 flex items-center">
+  <main class="max-w-4xl p-2 mx-auto py-12 flex">
     <Stepper />
     <section class="flex-1">
       <router-view />
