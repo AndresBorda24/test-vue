@@ -7,8 +7,8 @@ import InfoUsuario from "./components/info-usuario.vue"
 <template>
   <Header />
   <main class="max-w-5xl p-2 mx-auto py-12">
-    <InfoUsuario />
-    <!-- <InfoPlanes /> -->
+    <!-- <InfoUsuario /> -->
+    <InfoPlanes />
   </main>
 </template>
 

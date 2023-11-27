@@ -4,6 +4,7 @@ import { FwbInput, FwbFileInput, FwbButton } from 'flowbite-vue'
 import planes from "@/assets/planes.json"
 import PlanCard from "@/components/plan-card.vue"
 import FormLabel from "@/components/form-label.vue"
+import { useInfoPlanStore } from "@/stores/InfoPlan"
 
 // Icons xD
 import NequiIcon from "@/icons/nequi.vue"
@@ -16,14 +17,11 @@ const mediosDePago = {
   "Tarjeta": CardIcon
 }
 
-const state = ref({
-  plan: null,
-  soporte: null,
-  referencia: null
-})
+const { state } = useInfoPlanStore()
 
 function onSubmit() {
-  console.log(state.value);
+  useInfoPlanStore().finish()
+  console.log(state, useInfoPlanStore().state, useInfoPlanStore().isReady)
 }
 </script>
 
