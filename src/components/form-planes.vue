@@ -1,32 +1,8 @@
 <script setup>
   import { ref } from "vue"
   import { FwbCard } from 'flowbite-vue'
-  const planes = [
-    {
-        "id": 1,
-        "nombre": "Amarillo",
-        "vigencia": 365,
-        "beneficios": "Descuento del 10% en exámenes, imágenes y consultas especializadas; Acceso a todos nuestros servicios habilitados; Atención preferencial en servicio de urgencias; Manilla distintiva; Diferentes opciones de menú durante tu estancia; Habitación unipersonal; Servicios de Streaming; Podrás afiliar a 8 personas independientemente el grado de consanguinidad",
-        "valor": 50000,
-        "status": 1,
-        "entidad": "PARTIC",
-        "contrato": "PREF2023",
-        "plan": "01",
-        "valor_formatted": "50.000"
-    },
-    {
-        "id": 2,
-        "nombre": "Celeste",
-        "vigencia": 365,
-        "beneficios": "Descuento del 15% en exámenes, imágenes y consultas especializadas; Acceso a todos nuestros servicios habilitados; Atención preferencial en servicio de urgencias; Manilla distintiva; Diferentes opciones de menú durante tu estancia; Habitación unipersonal; Servicios de Streaming; Podrás afiliar a 8 personas independientemente el grado de consanguinidad",
-        "valor": 80000,
-        "status": 1,
-        "entidad": "PARTIC",
-        "contrato": "PREF2023",
-        "plan": "02",
-        "valor_formatted": "80.000"
-    }
-  ]
+  import planes from "@/assets/planes"
+
   const selectedPlan = ref(null);
 </script>
 

@@ -146,6 +146,6 @@ function onError() {
     <fwb-button
       type="submit"
       color="yellow"
-    >Alternative</fwb-button>
+    >Siguiente</fwb-button>
   </form>
 </template>

@@ -1,12 +1,14 @@
 <script setup>
-import Header from "@/components/header.vue";
-import InfoUsuario from "./components/info-usuario.vue";
+import Header from "@/components/header.vue"
+import InfoPlanes from "@/components/info-planes.vue"
+import InfoUsuario from "./components/info-usuario.vue"
 </script>
 
 <template>
   <Header />
   <main class="max-w-5xl p-2 mx-auto py-12">
-    <InfoUsuario />
+    <!-- <InfoUsuario /> -->
+    <InfoPlanes />
   </main>
 </template>
 
