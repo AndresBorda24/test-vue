@@ -1,11 +1,15 @@
 <script setup>
 import Header from "@/components/header.vue"
+import Stepper from "@/components/stepper.vue"
 </script>
 
 <template>
   <Header />
-  <main class="max-w-5xl p-2 mx-auto py-12">
-    <router-view />
+  <main class="max-w-4xl p-2 mx-auto py-12 flex items-center">
+    <Stepper />
+    <section class="flex-1">
+      <router-view />
+    </section>
   </main>
 </template>
 
