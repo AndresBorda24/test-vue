@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue"
+import { useRouter } from "vue-router"
 import planes from "@/assets/planes.json"
 import PlanCard from "@/components/plan-card.vue"
 import FormLabel from "@/components/form-label.vue"
@@ -10,6 +10,8 @@ import { FwbInput, FwbFileInput, FwbButton } from 'flowbite-vue'
 import NequiIcon from "@/icons/nequi.vue"
 import CashIcon from "@/icons/cash.vue"
 import CardIcon from "@/icons/card.vue"
+
+const router = useRouter()
 
 const mediosDePago = {
   "Nequi": NequiIcon,
@@ -93,14 +95,20 @@ function onSubmit() {
         <fwb-file-input id="file-drop" v-model="state.soporte" dropzone />
       </form-label>
 
-      <router-link :to="{ name: 'info-usuario' }">
-        Volver
-      </router-link>
 
-      <fwb-button
-        type="submit"
-        color="yellow"
-      >Siguiente</fwb-button>
+      <div class="grid grid-cols-2 gap-3">
+        <fwb-button
+          color="dark"
+          tag="router-link"
+          class="text-center"
+          :href="router.resolve({ name: 'info-usuario' }).href"
+        >Volver</fwb-button>
+
+        <fwb-button
+          type="submit"
+          color="yellow"
+        >Siguiente</fwb-button>
+      </div>
     </div>
   </form>
 </template>
