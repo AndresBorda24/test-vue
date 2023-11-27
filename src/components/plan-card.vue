@@ -1,5 +1,4 @@
 <script setup>
-import { FwbCard } from 'flowbite-vue'
 const props = defineProps({
   plan: {
     required: true

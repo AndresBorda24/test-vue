@@ -23,6 +23,9 @@ const { state } = useInfoPlanStore()
 
 function onSubmit() {
   console.log(state)
+  router.push({
+    name: 'info-confirmacion'
+  })
 }
 </script>
 

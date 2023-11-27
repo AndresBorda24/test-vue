@@ -1,3 +1,4 @@
+import { useInfoPlanStore } from "@/stores/InfoPlan"
 import { useInfoUsuarioStore } from "@/stores/InfoUsuario"
 
 export const routes = [
@@ -12,6 +13,19 @@ export const routes = [
     component: () => import("@/components/info-planes.vue"),
     beforeEnter: () => {
       if (! useInfoUsuarioStore().ready ) {
+        return { name: "info-usuario" }
+      }
+    }
+  },
+  {
+    path: '/confirmacion',
+    name: "info-confirmacion",
+    component: () => import("@/components/info-resumen.vue"),
+    beforeEnter: () => {
+      if (! useInfoUsuarioStore().ready ) {
+        return { name: "info-usuario" }
+      }
+      if (! useInfoPlanStore().ready ) {
         return { name: "info-usuario" }
       }
     }
