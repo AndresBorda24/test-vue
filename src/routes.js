@@ -16,4 +16,9 @@ export const routes = [
       }
     }
   },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import("@/components/not-found.vue")
+  },
 ]
