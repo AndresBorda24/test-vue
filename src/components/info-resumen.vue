@@ -13,7 +13,6 @@ const { state: infoUsuario } = useInfoUsuarioStore()
 
 onMounted(async () => {
   const planes = await usePlanesStore().getPlanes()
-  console.log(planes)
   plan.value = planes.find(p => p.id == infoPlan.plan )
 })
 </script>

@@ -26,7 +26,7 @@ export const routes = [
         return { name: "info-usuario" }
       }
       if (! useInfoPlanStore().ready ) {
-        return { name: "info-usuario" }
+        return { name: "info-planes" }
       }
     }
   },

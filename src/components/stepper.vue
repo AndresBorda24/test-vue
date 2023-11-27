@@ -34,9 +34,10 @@ const steps = ref([
 <template>
   <ol class="space-y-4 w-72">
     <li v-for="(step, index) in steps" :key="index">
-      <div
-        :class="['w-full p-4 rounded-lg border shadow', {
-          'text-blue-700 border-blue-300 bg-blue-50': route.name == step.route,
+      <router-link
+        :to="{ name: step.route }"
+        :class="['block w-full p-4 rounded-lg border shadow', {
+          'text-blue-700 border-blue-300 bg-blue-50 pointer-events-none': route.name == step.route,
           'text-green-700 border-green-300 bg-green-50': step.isReady && (route.name != step.route),
           'text-gray-900 bg-gray-100 border border-gray-300': ! step.isReady && (route.name != step.route)
         }]"
@@ -54,7 +55,8 @@ const steps = ref([
             v-else-if="route.name === step.route"
           />
         </div>
-      </div>
+      <!-- </div> -->
+      </router-link>
     </li>
   </ol>
 </template>

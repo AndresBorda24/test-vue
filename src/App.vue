@@ -8,7 +8,13 @@ import Stepper from "@/components/stepper.vue"
   <main class="max-w-4xl p-2 mx-auto py-12 flex">
     <Stepper />
     <section class="flex-1">
-      <router-view />
+      <router-view v-slot="{ Component }">
+        <transition name="fade">
+          <section>
+            <component :is="Component" />
+          </section>
+        </transition>
+      </router-view>
     </section>
   </main>
 </template>
@@ -19,5 +25,15 @@ import Stepper from "@/components/stepper.vue"
     background-color: #f7f7f7;
     background-image: radial-gradient(#025b7d 0.5px,transparent 0);
     background-size: 29px 29px;
+  }
+
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.5s ease;
+  }
+
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
   }
 </style>
