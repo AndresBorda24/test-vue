@@ -1,10 +1,10 @@
 <script setup>
 import { ref } from "vue"
-import { FwbInput, FwbFileInput, FwbButton } from 'flowbite-vue'
 import planes from "@/assets/planes.json"
 import PlanCard from "@/components/plan-card.vue"
 import FormLabel from "@/components/form-label.vue"
 import { useInfoPlanStore } from "@/stores/InfoPlan"
+import { FwbInput, FwbFileInput, FwbButton } from 'flowbite-vue'
 
 // Icons xD
 import NequiIcon from "@/icons/nequi.vue"
@@ -20,8 +20,7 @@ const mediosDePago = {
 const { state } = useInfoPlanStore()
 
 function onSubmit() {
-  useInfoPlanStore().finish()
-  console.log(state, useInfoPlanStore().state, useInfoPlanStore().isReady)
+  console.log(state)
 }
 </script>
 

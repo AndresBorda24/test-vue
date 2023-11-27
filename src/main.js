@@ -2,7 +2,7 @@ import './assets/main.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
 import App from './App.vue'
 import { routes } from "@/routes"
@@ -10,7 +10,7 @@ import { routes } from "@/routes"
 const pinia = createPinia()
 const app = createApp(App)
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes
 })
 

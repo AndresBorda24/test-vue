@@ -1,18 +1,23 @@
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { defineStore } from "pinia";
 
 export const useInfoPlanStore = defineStore('info-plan', () => {
-    const isReady = ref(false)
+  const state = ref({
+    plan: null,
+    soporte: null,
+    medioPago: null,
+    referencia: null
+  })
 
-    const state = ref({
-      plan: null,
-      soporte: null,
-      referencia: null
-    })
+  const required = [
+    "plan",
+    "medioPago",
+    "referencia",
+  ]
 
-    function finish() {
-        isReady.value = true
-    }
+  const ready = computed(() => {
+    return required.every(key => Boolean(state.value[key]))
+  })
 
-    return { state, isReady, finish }
+  return { state, ready }
 })

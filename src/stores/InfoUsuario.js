@@ -1,24 +1,34 @@
-import { ref } from "vue"
+import { computed, ref } from "vue"
 import { defineStore } from "pinia"
 
 export const useInfoUsuarioStore = defineStore('info-usuario', () => {
-    const isReady = ref(false)
-    const state   = ref({
-      nom1: null,
-      nom2: null,
-      ape1: null,
-      ape2: null,
-      cedula: null,
-      correo: null,
-      fech_nac: null,
-      password: null,
-      telefono: null,
-      direccion: null
-    })
+  const state   = ref({
+    nom1: null,
+    nom2: null,
+    ape1: null,
+    ape2: null,
+    cedula: null,
+    correo: null,
+    fech_nac: null,
+    password: null,
+    telefono: null,
+    direccion: null
+  })
 
-    function finish() {
-      isReady.value = true;
-    }
+  const required = [
+    "nom1",
+    "ape1",
+    "cedula",
+    "correo",
+    "fech_nac",
+    "password",
+    "telefono",
+    "direccion"
+  ]
 
-    return { state, isReady, finish }
+  const ready = computed(() => {
+    return required.every(key => Boolean(state.value[key]))
+  })
+
+  return { state, ready }
 })
