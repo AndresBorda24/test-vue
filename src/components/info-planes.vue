@@ -82,7 +82,7 @@ function onSubmit() {
 
       <form-label val="Referencia">
         <fwb-input
-          v-model="state.referencia"
+          v-model.trim="state.referencia"
           required
           size="sm"
           name="pago-referencia"

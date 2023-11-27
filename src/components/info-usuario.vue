@@ -29,20 +29,22 @@ function onError() {
   >
     <form-label val="Cédula">
       <fwb-input
-        v-model="state.cedula"
+        v-model.trim="state.cedula"
         required
         size="sm"
         minlength="4"
         name="cedula"
         :validation-status="errors.cedula && 'error'"
         placeholder="xxxxxxxx"
-      > <template #validationMessage>{{ errors.cedula }}</template> </fwb-input>
+      >
+        <template #validationMessage v-if="errors.cedula">{{ errors.cedula }}</template>
+      </fwb-input>
     </form-label>
 
     <div class="grid grid-cols-2 gap-4">
       <form-label val="Primer Nombre">
         <fwb-input
-          v-model="state.nom1"
+          v-model.trim="state.nom1"
           required
           size="sm"
           name="nom1"
@@ -51,7 +53,7 @@ function onError() {
       </form-label>
       <form-label val="Segundo Nombre">
         <fwb-input
-          v-model="state.nom2"
+          v-model.trim="state.nom2"
           size="sm"
           name="nom2"
           placeholder="Opcional"
@@ -62,7 +64,7 @@ function onError() {
     <div class="grid grid-cols-2 gap-4">
       <form-label val="Primer Apellido">
         <fwb-input
-          v-model="state.ape1"
+          v-model.trim="state.ape1"
           required
           size="sm"
           name="ape1"
@@ -71,7 +73,7 @@ function onError() {
       </form-label>
       <form-label val="Segundo Apellido">
         <fwb-input
-          v-model="state.ape2"
+          v-model.trim="state.ape2"
           size="sm"
           name="ape2"
           placeholder="Opcional"
@@ -82,18 +84,20 @@ function onError() {
     <div class="grid grid-cols-2 gap-4">
       <form-label val="Teléfono (3########)">
         <fwb-input
-          v-model="state.telefono"
+          v-model.trim="state.telefono"
           required
           size="sm"
           name="telefono"
           pattern="3[0-9]{9}"
           placeholder="Requerido"
           :validation-status="errors.telefono && 'error'"
-        > <template #validationMessage>{{ errors.telefono }}</template> </fwb-input>
+        >
+          <template #validationMessage v-if="errors.telefono">{{ errors.telefono }}</template>
+        </fwb-input>
       </form-label>
       <form-label val="Fecha de Nacimiento">
         <fwb-input
-          v-model="state.fech_nac"
+          v-model.trim="state.fech_nac"
           required
           size="sm"
           type="date"
@@ -105,19 +109,21 @@ function onError() {
 
     <form-label val="Correo">
       <fwb-input
-        v-model="state.correo"
+        v-model.trim="state.correo"
         required
         size="sm"
         type="email"
         name="correo"
         placeholder="Requerido"
         :validation-status="errors.correo && 'error'"
-      > <template #validationMessage>{{ errors.correo }}</template> </fwb-input>
+      >
+        <template #validationMessage v-if="errors.correo">{{ errors.correo }}</template>
+      </fwb-input>
     </form-label>
 
     <form-label val="Dirección">
       <fwb-input
-        v-model="state.direccion"
+        v-model.trim="state.direccion"
         required
         size="sm"
         name="direccion"
@@ -127,7 +133,7 @@ function onError() {
 
     <form-label val="Contraseña">
       <fwb-input
-        v-model="state.password"
+        v-model.trim="state.password"
         required
         size="sm"
         name="password"
