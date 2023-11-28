@@ -17,6 +17,24 @@ export async function getPlanes() {
   }
 }
 
+export async function userExists( cc ) {
+  let _data  = null
+  let _error = null
+
+  try {
+    const { data } = await ax.get(`/user/${cc}/exists`)
+    _data = data
+  } catch(e) {
+    _error = e
+  } finally {
+    return {
+      data: _data,
+      error: _error
+    }
+  }
+}
+
+
 export async function validateUser( userInfo ) {
   let _data  = null
   let _error = null

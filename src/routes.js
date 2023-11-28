@@ -5,7 +5,7 @@ export const routes = [
   {
     path: '/',
     name: "info-usuario",
-    component: () => import("@/components/info-usuario.vue"),
+    component: () => import("@/components/buscar-usuario.vue"),
   },
   {
     path: '/plan',

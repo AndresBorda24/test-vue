@@ -3,6 +3,7 @@ import { defineStore } from "pinia"
 
 export const useInfoUsuarioStore = defineStore('info-usuario', () => {
   const state   = ref({
+    id: null,
     nom1: null,
     nom2: null,
     ape1: null,
@@ -31,5 +32,9 @@ export const useInfoUsuarioStore = defineStore('info-usuario', () => {
     return required.every(key => Boolean(state.value[key]))
   })
 
-  return { state, ready }
+  const exists = computed(() => {
+    return state.value.id !== null && Boolean(state.value.id)
+  })
+
+  return { state, ready, exists }
 })

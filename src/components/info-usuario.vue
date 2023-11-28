@@ -44,12 +44,11 @@ function onError( error ) {
   >
     <form-label val="Cédula">
       <fwb-input
-        ref="fc"
         required
         size="sm"
-        autofocus
         minlength="4"
         name="num_histo"
+        disabled
         v-model.trim="state.num_histo"
         :validation-status="errors.num_histo && 'error'"
         placeholder="xxxxxxxx"
@@ -65,6 +64,7 @@ function onError( error ) {
         <fwb-input
           v-model.trim="state.nom1"
           required
+          autofocus
           size="sm"
           name="nom1"
           placeholder="Requerido"
