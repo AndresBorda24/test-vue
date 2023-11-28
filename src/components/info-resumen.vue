@@ -1,6 +1,8 @@
 <script setup>
+import { createUser } from "@/api"
 import { onMounted, ref } from "vue"
 import { useRouter } from "vue-router"
+import { useViewLoad } from "@/stores/ViewLoad"
 import { usePlanesStore } from "@/stores/Planes"
 import { useInfoPlanStore } from "@/stores/InfoPlan"
 import { useInfoUsuarioStore } from "@/stores/InfoUsuario"
@@ -10,6 +12,13 @@ const plan = ref({})
 const router = useRouter()
 const { state: infoPlan }= useInfoPlanStore()
 const { state: infoUsuario } = useInfoUsuarioStore()
+
+async function confirmado() {
+  const { error } = await useViewLoad().wrap(() => createUser({
+    usuario: infoUsuario,
+    pago: infoPlan
+  }))
+}
 
 onMounted(() => {
   const { planes } = usePlanesStore()
@@ -66,7 +75,10 @@ onMounted(() => {
         class="text-center"
         :href="router.resolve({ name: 'info-planes' }).href"
       >Volver</fwb-button>
-      <fwb-button color="green">Confirmar!</fwb-button>
+      <fwb-button
+        @click="confirmado"
+        color="green"
+      >Confirmar!</fwb-button>
     </div>
   </div>
 </template>

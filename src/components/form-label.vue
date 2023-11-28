@@ -8,7 +8,7 @@
 </script>
 
 <template>
-  <label class="text-gray-500 text-xs">
+  <label class="text-aso-primary text-xs">
     {{ val }}
     <slot />
   </label>
