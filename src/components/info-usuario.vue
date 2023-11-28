@@ -3,11 +3,13 @@ import { ref } from "vue"
 import { validateUser } from "@/api"
 import { useRouter } from "vue-router"
 import { useViewLoad } from "@/stores/ViewLoad"
+import { useToast } from 'vue-toast-notification'
 import { FwbInput, FwbButton } from 'flowbite-vue'
 import FormLabel from "@/components/form-label.vue"
 import { useInfoUsuarioStore } from "@/stores/InfoUsuario"
 
 const errors = ref({})
+const toast = useToast()
 const router = useRouter()
 const { state } = useInfoUsuarioStore()
 
@@ -20,6 +22,7 @@ async function onSubmit() {
 }
 
 function onError( error ) {
+  toast.error("Ha ocurrido un error", { duration: 6000, position: 'bottom' })
   let e = error.response?.data?.fields || {}
 
   errors.value = Object.keys(e).reduce((a, field) => {
@@ -41,11 +44,13 @@ function onError( error ) {
   >
     <form-label val="Cédula">
       <fwb-input
-        v-model.trim="state.num_histo"
+        ref="fc"
         required
         size="sm"
+        autofocus
         minlength="4"
         name="num_histo"
+        v-model.trim="state.num_histo"
         :validation-status="errors.num_histo && 'error'"
         placeholder="xxxxxxxx"
       >
@@ -135,7 +140,7 @@ function onError( error ) {
         :validation-status="errors.email && 'error'"
       >
         <template #validationMessage v-if="errors.email">
-          <span class="text-xs mt-15">{{ errors.telefono }}</span>
+          <span class="text-xs mt-15">{{ errors.email }}</span>
         </template>
       </fwb-input>
     </form-label>
