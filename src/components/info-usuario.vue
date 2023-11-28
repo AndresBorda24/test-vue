@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from "vue"
+import { validateUser } from "@/api"
 import { useRouter } from "vue-router"
+import { useViewLoad } from "@/stores/ViewLoad"
 import { FwbInput, FwbButton } from 'flowbite-vue'
 import FormLabel from "@/components/form-label.vue"
 import { useInfoUsuarioStore } from "@/stores/InfoUsuario"
@@ -9,13 +11,23 @@ const errors = ref({})
 const router = useRouter()
 const { state } = useInfoUsuarioStore()
 
-function onSubmit() {
+async function onSubmit() {
   errors.value = {}
+  const { error } = await useViewLoad().wrap(() => validateUser( state ))
+  if (error) return onError( error );
+
   router.push({ name: 'info-planes' })
 }
 
-function onError() {
-  // Implementar
+function onError( error ) {
+  let e = error.response?.data?.fields || {}
+
+  errors.value = Object.keys(e).reduce((a, field) => {
+    a[field] = e[field][0]
+    return a
+  }, {})
+
+  return false
 }
 </script>
 
@@ -37,7 +49,9 @@ function onError() {
         :validation-status="errors.num_histo && 'error'"
         placeholder="xxxxxxxx"
       >
-        <template #validationMessage v-if="errors.num_histo">{{ errors.num_histo }}</template>
+        <template #validationMessage v-if="errors.num_histo">
+          <span class="text-xs mt-15">{{ errors.num_histo }}</span>
+        </template>
       </fwb-input>
     </form-label>
 
@@ -92,7 +106,9 @@ function onError() {
           placeholder="Requerido"
           :validation-status="errors.telefono && 'error'"
         >
-          <template #validationMessage v-if="errors.telefono">{{ errors.telefono }}</template>
+          <template #validationMessage v-if="errors.telefono">
+            <span class="text-xs mt-15">{{ errors.telefono }}</span>
+          </template>
         </fwb-input>
       </form-label>
       <form-label val="Fecha de Nacimiento">
@@ -118,7 +134,9 @@ function onError() {
         placeholder="Requerido"
         :validation-status="errors.email && 'error'"
       >
-        <template #validationMessage v-if="errors.email">{{ errors.email }}</template>
+        <template #validationMessage v-if="errors.email">
+          <span class="text-xs mt-15">{{ errors.telefono }}</span>
+        </template>
       </fwb-input>
     </form-label>
 

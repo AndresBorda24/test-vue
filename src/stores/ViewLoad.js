@@ -12,5 +12,12 @@ export const useViewLoad = defineStore("view-load", () => {
         isLoading.value = false
     }
 
-    return { isLoading, setLoadingFalse, setLoadingTrue }
+    async function wrap( callable ) {
+        setLoadingTrue()
+        const data = await callable()
+        setLoadingFalse()
+        return data
+    }
+
+    return { isLoading, setLoadingFalse, setLoadingTrue, wrap }
 })
