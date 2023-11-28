@@ -34,7 +34,7 @@ function onSubmit() {
 </script>
 
 <template>
-  <p class="text-center text-aso-primary text-xl">Información sobre el plan</p>
+  <p class="text-center text-aso-primary text-xl font-bold">Información sobre el plan</p>
 
   <form
     autocomplete="off"

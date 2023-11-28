@@ -18,7 +18,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <p class="text-center text-aso-primary text-xl">Confirmación</p>
+  <p class="text-center text-aso-primary text-xl font-bold">Confirmación</p>
 
   <div class="bg-gray-50 px-8 py-6 border rounded shadow-md max-w-md mx-auto mb-10">
     <p class="text-aso-primary font-bold">Usuario:</p>

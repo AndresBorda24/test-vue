@@ -5,17 +5,17 @@ import Stepper from "@/components/stepper.vue"
 
 <template>
   <Header />
-  <main class="max-w-4xl p-2 mx-auto py-12 flex">
-    <Stepper />
-    <section class="flex-1">
-      <router-view v-slot="{ Component }">
-        <transition name="fade">
-          <section>
-            <component :is="Component" />
-          </section>
-        </transition>
-      </router-view>
+  <main class="max-w-4xl p-2 mx-auto py-12 flex justify-center gap-5">
+    <section>
+      <Stepper />
     </section>
+    <router-view v-slot="{ Component }">
+      <transition name="fade">
+        <section>
+          <component :is="Component" />
+        </section>
+      </transition>
+    </router-view>
   </main>
 </template>
 

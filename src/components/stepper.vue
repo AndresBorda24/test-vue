@@ -32,7 +32,7 @@ const steps = ref([
 </script>
 
 <template>
-  <ol class="space-y-4 w-72">
+  <ol class="space-y-4 w-72 sticky top-3">
     <li v-for="(step, index) in steps" :key="index">
       <div
         :class="['block w-full p-4 rounded-lg border shadow', {
