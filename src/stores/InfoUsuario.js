@@ -7,10 +7,11 @@ export const useInfoUsuarioStore = defineStore('info-usuario', () => {
     nom2: null,
     ape1: null,
     ape2: null,
-    cedula: null,
-    correo: null,
+    clave: null,
+    num_histo: null,
+    ciudad: "Ibagué",
+    email: null,
     fech_nac: null,
-    password: null,
     telefono: null,
     direccion: null
   })
@@ -18,10 +19,10 @@ export const useInfoUsuarioStore = defineStore('info-usuario', () => {
   const required = [
     "nom1",
     "ape1",
-    "cedula",
-    "correo",
+    "num_histo",
+    "email",
     "fech_nac",
-    "password",
+    "clave",
     "telefono",
     "direccion"
   ]

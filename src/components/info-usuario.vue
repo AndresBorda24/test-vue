@@ -29,15 +29,15 @@ function onError() {
   >
     <form-label val="Cédula">
       <fwb-input
-        v-model.trim="state.cedula"
+        v-model.trim="state.num_histo"
         required
         size="sm"
         minlength="4"
-        name="cedula"
-        :validation-status="errors.cedula && 'error'"
+        name="num_histo"
+        :validation-status="errors.num_histo && 'error'"
         placeholder="xxxxxxxx"
       >
-        <template #validationMessage v-if="errors.cedula">{{ errors.cedula }}</template>
+        <template #validationMessage v-if="errors.num_histo">{{ errors.num_histo }}</template>
       </fwb-input>
     </form-label>
 
@@ -109,15 +109,16 @@ function onError() {
 
     <form-label val="Correo">
       <fwb-input
-        v-model.trim="state.correo"
+        v-model.trim="state.email"
         required
         size="sm"
         type="email"
-        name="correo"
+        name="email"
+        autocomplete="email"
         placeholder="Requerido"
-        :validation-status="errors.correo && 'error'"
+        :validation-status="errors.email && 'error'"
       >
-        <template #validationMessage v-if="errors.correo">{{ errors.correo }}</template>
+        <template #validationMessage v-if="errors.email">{{ errors.email }}</template>
       </fwb-input>
     </form-label>
 
@@ -133,10 +134,10 @@ function onError() {
 
     <form-label val="Contraseña">
       <fwb-input
-        v-model.trim="state.password"
+        v-model.trim="state.clave"
         required
         size="sm"
-        name="password"
+        name="clave"
         placeholder="Requerido"
       />
     </form-label>

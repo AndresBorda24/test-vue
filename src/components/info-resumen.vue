@@ -29,11 +29,11 @@ onMounted(async () => {
       </fwb-list-group-item>
       <fwb-list-group-item class="flex gap-3">
         <span class="font-bold">Documento:</span>
-        <span>{{ infoUsuario.cedula }}</span>
+        <span>{{ infoUsuario.num_histo }}</span>
       </fwb-list-group-item>
       <fwb-list-group-item class="flex gap-3">
         <span class="font-bold">Contraseña:</span>
-        <span>{{ infoUsuario.password }}</span>
+        <span>{{ infoUsuario.clave }}</span>
       </fwb-list-group-item>
     </fwb-list-group>
 
