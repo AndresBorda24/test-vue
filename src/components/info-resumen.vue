@@ -11,8 +11,8 @@ const router = useRouter()
 const { state: infoPlan }= useInfoPlanStore()
 const { state: infoUsuario } = useInfoUsuarioStore()
 
-onMounted(async () => {
-  const planes = await usePlanesStore().getPlanes()
+onMounted(() => {
+  const { planes } = usePlanesStore()
   plan.value = planes.find(p => p.id == infoPlan.plan )
 })
 </script>

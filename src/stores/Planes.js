@@ -1,18 +1,9 @@
-import { ref } from "vue"
-import { defineStore } from "pinia";
-import _planes from "@/assets/planes.json"
+import { getPlanes } from "@/api"
+import { defineStore } from "pinia"
+
+const { data: __planes } = await getPlanes();
 
 export const usePlanesStore = defineStore("planes", () => {
-    let planes = ref(null)
-
-    async function getPlanes() {
-        if (planes.value === null) {
-            // Hacer solicitud
-            planes.value = _planes
-        }
-
-        return planes.value
-    }
-
-    return { getPlanes }
+    const planes = __planes
+    return { planes }
 })

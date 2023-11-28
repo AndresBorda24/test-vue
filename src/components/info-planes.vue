@@ -1,5 +1,4 @@
 <script setup>
-import { onMounted, ref } from "vue"
 import { useRouter } from "vue-router"
 import { usePlanesStore } from "@/stores/Planes"
 import { useInfoPlanStore } from "@/stores/InfoPlan"
@@ -14,17 +13,13 @@ import CashIcon from "@/icons/cash.vue"
 import CardIcon from "@/icons/card.vue"
 
 const router = useRouter()
-const planes = ref(null)
-const { state } = useInfoPlanStore()
+const { state }  = useInfoPlanStore()
+const { planes } = usePlanesStore()
 const mediosDePago = {
   "Nequi": NequiIcon,
   "Efectivo": CashIcon,
   "Tarjeta": CardIcon
 }
-
-onMounted(async () => {
-  planes.value = await usePlanesStore().getPlanes()
-})
 
 function onSubmit() {
   router.push({
