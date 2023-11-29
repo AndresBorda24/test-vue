@@ -5,13 +5,17 @@ import { useInfoUsuarioStore } from "@/stores/InfoUsuario"
 
 import UserIcon from "@/icons/user.vue"
 
-const { state, hasPlan, plan } = storeToRefs(useInfoUsuarioStore())
+const { state, hasPlan, plan, planExpira } = storeToRefs(useInfoUsuarioStore())
+const formatter = new Intl.DateTimeFormat('es-CO', {
+  dateStyle: 'long',
+  timeZone: "America/Bogota"
+})
 </script>
 
 <template>
   <p class="text-xl text-aso-primary text-center font-bold">Usuario Registrado!</p>
   <section class="bg-gray-50 px-10 py-7 border rounded shadow-xl max-w-md mx-auto">
-    <div class="flex flex-col gap-5 items-center mb-10">
+    <div class="flex flex-col gap-5 items-center mb-8">
       <UserIcon class="w-28 text-aso-primary" />
       <div class="flex-1 text-center">
         <p class="text-3xl font-bold capitalize text-aso-tertiary">
@@ -23,9 +27,10 @@ const { state, hasPlan, plan } = storeToRefs(useInfoUsuarioStore())
     </div>
 
     <div v-if="hasPlan">
-      <p class="mb-4 text-center">
-        El usuario <span class="font-bold">ya</span> cuenta con un plan: <br>
-        <span class="text-aso-primary font-bold text-lg">Plan {{ "Amarillo" }}</span>
+      <p class="mb-4">
+        El usuario <span class="font-bold">ya</span> cuenta con el
+        <span class="text-aso-primary font-bold text-lg">Plan {{ plan.nombre }}</span>
+        que expira el próximo <span class="font-bold">{{ formatter.format(planExpira) }}</span>.
       </p>
 
       <fwb-button

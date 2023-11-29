@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [
     vue(),
   ],
-  root: 'src',
+  // root: 'src',
   build: {
     manifest: true,
     rollupOptions: {
@@ -18,6 +18,7 @@ export default defineConfig({
   server: {
     origin: 'http://localhost:5173',
   },
+  // envDir: './',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))

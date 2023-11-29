@@ -22,6 +22,7 @@ export async function userExists( cc ) {
   let _error = null
 
   try {
+
     const { data } = await ax.get(`/user/${cc}/exists`)
     _data = data
   } catch(e) {
@@ -33,7 +34,6 @@ export async function userExists( cc ) {
     }
   }
 }
-
 
 export async function validateUser( userInfo ) {
   let _data  = null
@@ -58,6 +58,23 @@ export async function createUser( info ) {
 
   try {
     const { data } = await ax.post("/create-user", info)
+    _data = data
+  } catch(e) {
+    _error = e
+  } finally {
+    return {
+      data: _data,
+      error: _error
+    }
+  }
+}
+
+export async function fetchUser( doc ) {
+  let _data  = null
+  let _error = null
+
+  try {
+    const { data } = await ax.get(`/${doc}/fetch`)
     _data = data
   } catch(e) {
     _error = e

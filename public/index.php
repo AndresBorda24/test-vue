@@ -10,6 +10,6 @@
     <div id="app" class="min-h-screen"></div>
     <!-- si es desarrollo -->
     <script type="module" src="http://localhost:5173/@vite/client"></script>
-    <script type="module" src="http://localhost:5173/main.js"></script>
+    <script type="module" src="http://localhost:5173/src/main.js"></script>
   </body>
 </html>

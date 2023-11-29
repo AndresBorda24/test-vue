@@ -1,23 +1,20 @@
 <script setup>
-import { ref } from "vue"
 import { storeToRefs } from "pinia"
 import { useToast } from 'vue-toast-notification'
 import { FwbInput, FwbButton } from 'flowbite-vue'
 import FormLabel from "@/components/form-label.vue"
 import { useInfoUsuarioStore } from "@/stores/InfoUsuario"
 
+import UserAlert from "@/icons/user-alert.vue"
 import InfoUsuario from "@/components/info-usuario.vue"
 
 const toast = useToast()
 const { state, exists, fetched }  = storeToRefs( useInfoUsuarioStore() )
 
 async function onSubmit() {
-  // const { data, error } = await userExists( state.value.num_histo )
-  // if (error !== null) return onError();
-  await useInfoUsuarioStore().fetch(state.value.num_histo)
+  const error = await useInfoUsuarioStore().fetchInfo(state.value.num_histo)
 
-  // Data debe tener la informacion del usuario (si existe) y tambien la info
-  // del plan (Si tiene uno activo)
+  if (error) onError()
 }
 
 function onError() {
@@ -56,4 +53,29 @@ function onError() {
   </form>
 
   <InfoUsuario v-if="fetched && exists" />
+
+  <div
+    v-if="fetched && !exists"
+    class="bg-gray-50 px-10 py-7 border rounded shadow-xl max-w-md mx-auto"
+  >
+    <div class="flex flex-col gap-5 items-center">
+      <UserAlert class="w-28 text-aso-primary" />
+      <p class="text-sm text-center">
+        El usuario con el documento: <span class="font-bold">{{ state.num_histo }}</span> aún no ha sido creado.
+      </p>
+
+      <div class="flex justify-center gap-4">
+        <fwb-button
+          color="red"
+          outline
+          @click="useInfoUsuarioStore().$reset()"
+        >Cancelar</fwb-button>
+        <fwb-button
+          href="/usuario"
+          color="yellow"
+          tag="router-link"
+        >Crear</fwb-button>
+      </div>
+    </div>
+  </div>
 </template>
