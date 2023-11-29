@@ -11,17 +11,16 @@ import InfoUsuario from "@/components/info-usuario.vue"
 
 const toast = useToast()
 const requested = ref(false)
-const { state }  = storeToRefs( useInfoUsuarioStore() )
-const { exists } = useInfoUsuarioStore()
+const { state, exists }  = storeToRefs( useInfoUsuarioStore() )
 
 async function onSubmit() {
-  const { data, error } = await userExists( state.value.num_histo )
-  if (error !== null) return onError();
+  // const { data, error } = await userExists( state.value.num_histo )
+  // if (error !== null) return onError();
 
   requested.value = true
   const fakeUser = {
-    id: 12,
-    ape1: "Borda",
+    id:12,
+    ape1:"Borda",
     ape2:null,
     clave:null,
     direccion:"Un tiburón que habla ingles en Japón",
@@ -35,8 +34,6 @@ async function onSubmit() {
   }
 
   state.value = fakeUser
-
-
   // Data debe tener la informacion del usuario (si existe) y tambien la info
   // del plan (Si tiene uno activo)
 }
@@ -48,7 +45,7 @@ function onError() {
 
 <template>
   <form
-    v-if="! exists && requested"
+    v-if="! exists && ! requested"
     autocomplete="off"
     id="form-info-usuario"
     @submit.prevent="onSubmit"
@@ -76,5 +73,5 @@ function onError() {
     <fwb-button type="submit" color="yellow">Buscar</fwb-button>
   </form>
 
-  <InfoUsuario v-if="! exists" />
+  <InfoUsuario v-if="true" />
 </template>
