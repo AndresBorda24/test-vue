@@ -25,7 +25,7 @@ const steps = ref([
     isReady: userReady
   }, {
     name: "Información del Plan",
-    route: "info-planes",
+    route: "select-plan",
     isReady: planReady
   }, {
     name: "Confirmación",

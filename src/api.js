@@ -36,3 +36,7 @@ export async function createUser( info ) {
 export async function fetchUser( doc ) {
   return request(() => ax.get(`/${doc}/fetch`))
 }
+
+export async function createPago(userId, info) {
+  return request(() => ax.post(`/${userId}/create-pago`, info))
+}

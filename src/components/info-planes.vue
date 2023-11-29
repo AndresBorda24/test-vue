@@ -27,7 +27,7 @@ function onSubmit() {
 
 function volver() {
   useInfoPlanStore().$reset()
-  router.push({ name: 'search-user' })
+  router.push({ name: 'user-found' })
 }
 </script>
 
@@ -105,6 +105,7 @@ function volver() {
         <fwb-button
           color="dark"
           class="text-center"
+          type="button"
           @click="volver"
         >Volver</fwb-button>
 

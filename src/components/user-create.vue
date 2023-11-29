@@ -18,6 +18,7 @@ async function onSubmit() {
   const { error, data } = await useViewLoad().wrap(() => createUser( state ))
   if (error) return onError( error );
 
+  toast.success("Usuario Creado!", { duration: 10000, position: 'top-right' })
   useInfoUsuarioStore().setInfo(data)
   router.push({ name: 'select-plan' })
 }

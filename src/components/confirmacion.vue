@@ -1,23 +1,30 @@
 <script setup>
-import { createUser } from "@/api"
+import { createPago } from "@/api"
 import { onMounted, ref } from "vue"
 import { useRouter } from "vue-router"
 import { useViewLoad } from "@/stores/ViewLoad"
 import { usePlanesStore } from "@/stores/Planes"
+import { useToast } from 'vue-toast-notification'
 import { useInfoPlanStore } from "@/stores/InfoPlan"
 import { useInfoUsuarioStore } from "@/stores/InfoUsuario"
 import { FwbListGroup, FwbListGroupItem, FwbButton } from 'flowbite-vue'
 
-const plan = ref({})
+const plan   = ref({})
+const toast  = useToast()
 const router = useRouter()
 const { state: infoPlan }= useInfoPlanStore()
 const { state: infoUsuario } = useInfoUsuarioStore()
 
 async function confirmado() {
-  const { error } = await useViewLoad().wrap(() => createUser({
-    usuario: infoUsuario,
-    pago: infoPlan
-  }))
+  const { error } = await useViewLoad()
+    .wrap(() => createPago( infoUsuario.id, infoPlan))
+
+  if (error) {
+    toast.error("Ha ocurrido un error!", { duration: 6000, position: "bottom" })
+    return
+  }
+
+  toast.success("Pago Registrado!")
 }
 
 onMounted(() => {
@@ -39,10 +46,6 @@ onMounted(() => {
       <fwb-list-group-item class="flex gap-3">
         <span class="font-bold">Documento:</span>
         <span>{{ infoUsuario.num_histo }}</span>
-      </fwb-list-group-item>
-      <fwb-list-group-item class="flex gap-3">
-        <span class="font-bold">Contraseña:</span>
-        <span>{{ infoUsuario.clave }}</span>
       </fwb-list-group-item>
     </fwb-list-group>
 
