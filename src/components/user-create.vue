@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue"
-import { validateUser } from "@/api"
+import { createUser } from "@/api"
 import { useRouter } from "vue-router"
 import { useViewLoad } from "@/stores/ViewLoad"
 import { useToast } from 'vue-toast-notification'
@@ -15,10 +15,11 @@ const { state } = useInfoUsuarioStore()
 
 async function onSubmit() {
   errors.value = {}
-  const { error } = await useViewLoad().wrap(() => validateUser( state ))
+  const { error, data } = await useViewLoad().wrap(() => createUser( state ))
   if (error) return onError( error );
 
-  router.push({ name: 'info-planes' })
+  useInfoUsuarioStore().setInfo(data)
+  router.push({ name: 'select-plan' })
 }
 
 function onError( error ) {
