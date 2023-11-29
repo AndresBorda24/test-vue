@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue"
+import { ref, computed } from "vue"
 import { storeToRefs } from "pinia"
 import { useRoute } from "vue-router"
 
@@ -14,11 +14,13 @@ const route = useRoute()
 const { ready: planReady } = storeToRefs( useInfoPlanStore() )
 const { ready: userReady } = storeToRefs( useInfoUsuarioStore() )
 
+const confirmReady = computed(() => route.name === "finale")
+
 const steps = ref([
   {
     name: "Busqueda Usuario",
     route: "search-user",
-    isReady: () => route.name !== "search-user"
+    isReady: true
   }, {
     name: "Creacion Usuario",
     route: "create-usuario",
@@ -30,6 +32,10 @@ const steps = ref([
   }, {
     name: "Confirmación",
     route: "info-confirmacion",
+    isReady: confirmReady
+  }, {
+    name: "Finale",
+    route: "finale",
     isReady: false
   }
 ])

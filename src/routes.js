@@ -58,6 +58,18 @@ export const routes = [
         return { name: "select-plan" }
       }
     }
+  }, {
+    path: '/finale',
+    name: "finale",
+    component: () => import("@/components/finale.vue"),
+    beforeEnter: () => {
+      // if (! useInfoUsuarioStore().ready ) {
+      //   return { name: "search-user" }
+      // }
+      // if (! useInfoPlanStore().ready ) {
+      //   return { name: "select-plan" }
+      // }
+    }
   },
   {
     path: '/:pathMatch(.*)*',
