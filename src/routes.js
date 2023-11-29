@@ -10,7 +10,13 @@ export const routes = [
   {
     path: '/usuario',
     name: "create-usuario",
-    component: () => import("@/components/create-usuario.vue")
+    component: () => import("@/components/create-usuario.vue"),
+    beforeEnter: () => {
+      const { state } = useInfoUsuarioStore()
+      if (! state.num_histo ) {
+        return { name: "info-usuario" }
+      }
+    }
   },
   {
     path: '/plan',

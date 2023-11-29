@@ -2,6 +2,7 @@
 import { storeToRefs } from "pinia"
 import { useToast } from 'vue-toast-notification'
 import { FwbInput, FwbButton } from 'flowbite-vue'
+import { useViewLoad } from "@/stores/ViewLoad"
 import FormLabel from "@/components/form-label.vue"
 import { useInfoUsuarioStore } from "@/stores/InfoUsuario"
 
@@ -12,7 +13,8 @@ const toast = useToast()
 const { state, exists, fetched }  = storeToRefs( useInfoUsuarioStore() )
 
 async function onSubmit() {
-  const error = await useInfoUsuarioStore().fetchInfo(state.value.num_histo)
+  const error = await useViewLoad().wrap(() =>
+    useInfoUsuarioStore().fetchInfo(state.value.num_histo))
 
   if (error) onError()
 }
@@ -54,11 +56,9 @@ function onError() {
 
   <InfoUsuario v-if="fetched && exists" />
 
-  <div
-    v-if="fetched && !exists"
-    class="bg-gray-50 px-10 py-7 border rounded shadow-xl max-w-md mx-auto"
-  >
-    <div class="flex flex-col gap-5 items-center">
+  <div v-if="fetched && !exists" >
+    <p class="text-xl text-aso-primary text-center font-bold">No Encontrado!</p>
+    <div class="bg-gray-50 px-10 py-7 border rounded shadow-xl max-w-md mx-auto flex flex-col gap-5 items-center">
       <UserAlert class="w-28 text-aso-primary" />
       <p class="text-sm text-center">
         El usuario con el documento: <span class="font-bold">{{ state.num_histo }}</span> aún no ha sido creado.
