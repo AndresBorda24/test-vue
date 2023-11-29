@@ -1,11 +1,9 @@
-import { fetchUser } from "@/api"
 import { computed, ref } from "vue"
 import { defineStore } from "pinia"
 
 export const useInfoUsuarioStore = defineStore('info-usuario', () => {
   const plan = ref(null)
   const state = ref(null)
-  const fetched = ref(false)
 
   const ready = computed(() => Boolean(state.value.id))
   const exists = computed(() => state.value.id !== null && Boolean(state.value.id))
@@ -17,10 +15,7 @@ export const useInfoUsuarioStore = defineStore('info-usuario', () => {
     return created
   })
 
-  async function fetchInfo( documento ) {
-    const { data, error } = await fetchUser( documento )
-    if (error !== null) return error
-
+  async function setInfo( data ) {
     if (data !== null) {
       data.info.num_histo = data.info.documento
       delete data.info.documento
@@ -28,16 +23,13 @@ export const useInfoUsuarioStore = defineStore('info-usuario', () => {
       state.value = data.info
       plan.value  = data.pago
     }
-
-    fetched.value = true
   }
 
   function $reset() {
-    fetched.value = false
     plan.value  = null
     state.value = {}
   }
 
   $reset()
-  return { state, ready, exists, hasPlan, plan, planExpira, fetchInfo, fetched, $reset }
+  return { state, ready, exists, hasPlan, plan, planExpira, setInfo, $reset }
 })

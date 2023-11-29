@@ -73,7 +73,7 @@ onMounted(() => {
         color="dark"
         tag="router-link"
         class="text-center"
-        :href="router.resolve({ name: 'info-planes' }).href"
+        :href="router.resolve({ name: 'select-plan' }).href"
       >Volver</fwb-button>
       <fwb-button
         @click="confirmado"

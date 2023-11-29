@@ -3,7 +3,7 @@ import { FwbButton } from 'flowbite-vue'
 import { useRouter } from "vue-router"
 
 const router = useRouter()
-const inicio = router.resolve({ name: 'info-usuario' })
+const inicio = router.resolve({ name: 'search-user' })
 </script>
 
 <template>

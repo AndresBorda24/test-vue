@@ -22,9 +22,12 @@ const mediosDePago = {
 }
 
 function onSubmit() {
-  router.push({
-    name: 'info-confirmacion'
-  })
+  router.push({ name: 'confirmacion' })
+}
+
+function volver() {
+  useInfoPlanStore().$reset()
+  router.push({ name: 'search-user' })
 }
 </script>
 
@@ -101,9 +104,8 @@ function onSubmit() {
       <div class="grid grid-cols-2 gap-3">
         <fwb-button
           color="dark"
-          tag="router-link"
           class="text-center"
-          :href="router.resolve({ name: 'info-usuario' }).href"
+          @click="volver"
         >Volver</fwb-button>
 
         <fwb-button

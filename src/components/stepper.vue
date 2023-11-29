@@ -17,8 +17,8 @@ const { ready: userReady } = storeToRefs( useInfoUsuarioStore() )
 const steps = ref([
   {
     name: "Busqueda Usuario",
-    route: "info-usuario",
-    isReady: () => route.name !== "info-usuario"
+    route: "search-user",
+    isReady: () => route.name !== "search-user"
   }, {
     name: "Creacion Usuario",
     route: "create-usuario",

@@ -35,7 +35,7 @@ function onError( error ) {
 
 function cancel() {
   useInfoUsuarioStore().$reset()
-  router.push({ name: "info-usuario" })
+  router.push({ name: "search-user" })
 }
 </script>
 

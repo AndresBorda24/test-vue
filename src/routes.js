@@ -4,40 +4,58 @@ import { useInfoUsuarioStore } from "@/stores/InfoUsuario"
 export const routes = [
   {
     path: '/',
-    name: "info-usuario",
-    component: () => import("@/components/buscar-usuario.vue"),
-  },
-  {
+    name: "search-user",
+    component: () => import("@/components/user-search.vue"),
+  }, {
     path: '/usuario',
     name: "create-usuario",
-    component: () => import("@/components/create-usuario.vue"),
+    component: () => import("@/components/user-create.vue"),
     beforeEnter: () => {
       const { state } = useInfoUsuarioStore()
       if (! state.num_histo ) {
-        return { name: "info-usuario" }
+        return { name: "search-user" }
       }
     }
-  },
-  {
+  }, {
+    path: '/usuario-no-encontrado',
+    name: "user-not-found",
+    component: () => import("@/components/user-not-found.vue"),
+    beforeEnter: () => {
+      const { exists, state } = useInfoUsuarioStore()
+      if (exists || ! state.num_histo) {
+        return { name: "search-user" }
+      }
+    }
+  }, {
+    path: '/usuario-encontrado',
+    name: "user-found",
+    component: () => import("@/components/user-info.vue"),
+    beforeEnter: () => {
+      const { exists } = useInfoUsuarioStore()
+      if (! exists ) {
+        return { name: "search-user" }
+      }
+    }
+  }, {
     path: '/plan',
-    name: "info-planes",
+    name: "select-plan",
     component: () => import("@/components/info-planes.vue"),
     beforeEnter: () => {
       if (! useInfoUsuarioStore().ready ) {
-        return { name: "info-usuario" }
+        return { name: "search-user" }
       }
     }
   },
   {
     path: '/confirmacion',
-    name: "info-confirmacion",
-    component: () => import("@/components/info-resumen.vue"),
+    name: "confirmacion",
+    component: () => import("@/components/confirmacion.vue"),
     beforeEnter: () => {
       if (! useInfoUsuarioStore().ready ) {
-        return { name: "info-usuario" }
+        return { name: "search-user" }
       }
       if (! useInfoPlanStore().ready ) {
-        return { name: "info-planes" }
+        return { name: "select-plan" }
       }
     }
   },

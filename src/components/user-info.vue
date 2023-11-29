@@ -1,15 +1,22 @@
 <script setup>
+import { useRouter } from "vue-router"
 import { storeToRefs } from "pinia"
 import { FwbButton } from 'flowbite-vue'
 import { useInfoUsuarioStore } from "@/stores/InfoUsuario"
 
 import UserIcon from "@/icons/user.vue"
 
+const router = useRouter()
 const { state, hasPlan, plan, planExpira } = storeToRefs(useInfoUsuarioStore())
 const formatter = new Intl.DateTimeFormat('es-CO', {
   dateStyle: 'long',
   timeZone: "America/Bogota"
 })
+
+function cancel() {
+  useInfoUsuarioStore().$reset()
+  router.push({ name: 'search-user' })
+}
 </script>
 
 <template>
@@ -36,15 +43,15 @@ const formatter = new Intl.DateTimeFormat('es-CO', {
       <fwb-button
         color="red"
         class="block mx-auto"
-        @click="useInfoUsuarioStore().$reset()"
+        @click="cancel"
       >Volver</fwb-button>
     </div>
 
     <div v-if="! hasPlan" class="flex justify-center gap-3">
       <fwb-button
-        color="red"
         outline
-        @click="useInfoUsuarioStore().$reset()"
+        color="red"
+        @click="cancel"
       >Cancelar</fwb-button>
       <fwb-button
         color="yellow"
