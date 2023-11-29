@@ -1,11 +1,11 @@
 import { ax } from "@/lib/axios"
 
-export async function getPlanes() {
+async function request( req ) {
   let _data  = null
   let _error = null
 
   try {
-    const { data } = await ax.get("/get-planes")
+    const { data } = await req()
     _data = data
   } catch(e) {
     _error = e
@@ -17,71 +17,22 @@ export async function getPlanes() {
   }
 }
 
-export async function userExists( cc ) {
-  let _data  = null
-  let _error = null
-
-  try {
-
-    const { data } = await ax.get(`/user/${cc}/exists`)
-    _data = data
-  } catch(e) {
-    _error = e
-  } finally {
-    return {
-      data: _data,
-      error: _error
-    }
-  }
+export function getPlanes() {
+  return request(() => ax.get("/get-planes"))
 }
 
-export async function validateUser( userInfo ) {
-  let _data  = null
-  let _error = null
+export function userExists( cc ) {
+  return request(() => ax.get(`/user/${cc}/exists`))
+}
 
-  try {
-    const { data } = await ax.post("/validate-user", userInfo)
-    _data = data
-  } catch(e) {
-    _error = e
-  } finally {
-    return {
-      data: _data,
-      error: _error
-    }
-  }
+export function validateUser( userInfo ) {
+  return request(() => ax.post("/validate-user", userInfo))
 }
 
 export async function createUser( info ) {
-  let _data  = null
-  let _error = null
-
-  try {
-    const { data } = await ax.post("/create-user", info)
-    _data = data
-  } catch(e) {
-    _error = e
-  } finally {
-    return {
-      data: _data,
-      error: _error
-    }
-  }
+  return request(() => ax.post("/create-user", info))
 }
 
 export async function fetchUser( doc ) {
-  let _data  = null
-  let _error = null
-
-  try {
-    const { data } = await ax.get(`/${doc}/fetch`)
-    _data = data
-  } catch(e) {
-    _error = e
-  } finally {
-    return {
-      data: _data,
-      error: _error
-    }
-  }
+  return request(() => ax.get(`/${doc}/fetch`))
 }

@@ -32,6 +32,11 @@ function onError( error ) {
 
   return false
 }
+
+function cancel() {
+  useInfoUsuarioStore().$reset()
+  router.push({ name: "info-usuario" })
+}
 </script>
 
 <template>
@@ -165,9 +170,17 @@ function onError( error ) {
       />
     </form-label>
 
-    <fwb-button
-      type="submit"
-      color="yellow"
-    >Siguiente</fwb-button>
+    <div class="flex justify-center gap-4">
+      <fwb-button
+        outline
+        color="red"
+        type="button"
+        @click="cancel"
+      >Cancelar</fwb-button>
+      <fwb-button
+        type="submit"
+        color="yellow"
+      >Registrar</fwb-button>
+    </div>
   </form>
 </template>
