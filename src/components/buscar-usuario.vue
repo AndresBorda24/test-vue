@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from "vue"
-import { userExists } from "@/api"
 import { storeToRefs } from "pinia"
 import { useToast } from 'vue-toast-notification'
 import { FwbInput, FwbButton } from 'flowbite-vue'
@@ -10,30 +9,13 @@ import { useInfoUsuarioStore } from "@/stores/InfoUsuario"
 import InfoUsuario from "@/components/info-usuario.vue"
 
 const toast = useToast()
-const requested = ref(false)
-const { state, exists }  = storeToRefs( useInfoUsuarioStore() )
+const { state, exists, fetched }  = storeToRefs( useInfoUsuarioStore() )
 
 async function onSubmit() {
   // const { data, error } = await userExists( state.value.num_histo )
   // if (error !== null) return onError();
+  await useInfoUsuarioStore().fetch(state.value.num_histo)
 
-  requested.value = true
-  const fakeUser = {
-    id:12,
-    ape1:"Borda",
-    ape2:null,
-    clave:null,
-    direccion:"Un tiburón que habla ingles en Japón",
-    email:"anjart24@gmail.com",
-    fech_nac:"2002-12-31",
-    nom1:"Andres",
-    nom2:"Jair",
-    ciudad:"Ibagué",
-    num_histo:"1005702274",
-    telefono:"3209353216",
-  }
-
-  state.value = fakeUser
   // Data debe tener la informacion del usuario (si existe) y tambien la info
   // del plan (Si tiene uno activo)
 }
@@ -45,7 +27,7 @@ function onError() {
 
 <template>
   <form
-    v-if="! exists && ! requested"
+    v-if="! exists && ! fetched"
     autocomplete="off"
     id="form-info-usuario"
     @submit.prevent="onSubmit"
@@ -73,5 +55,5 @@ function onError() {
     <fwb-button type="submit" color="yellow">Buscar</fwb-button>
   </form>
 
-  <InfoUsuario v-if="true" />
+  <InfoUsuario v-if="fetched && exists" />
 </template>

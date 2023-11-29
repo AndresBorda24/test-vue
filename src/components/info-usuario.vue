@@ -1,13 +1,11 @@
 <script setup>
 import { storeToRefs } from "pinia"
-import { useRouter } from "vue-router"
 import { FwbButton } from 'flowbite-vue'
 import { useInfoUsuarioStore } from "@/stores/InfoUsuario"
 
 import UserIcon from "@/icons/user.vue"
 
-const router = useRouter()
-const { state } = storeToRefs(useInfoUsuarioStore())
+const { state, hasPlan, plan } = storeToRefs(useInfoUsuarioStore())
 </script>
 
 <template>
@@ -24,10 +22,30 @@ const { state } = storeToRefs(useInfoUsuarioStore())
       </div>
     </div>
 
-    <div class="flex justify-center gap-3">
-      <!-- <fwb-button color="red">Volver</fwb-button> -->
-      <fwb-button color="red" outline>Cancelar</fwb-button>
-      <fwb-button color="yellow" >Siguiente</fwb-button>
+    <div v-if="hasPlan">
+      <p class="mb-4 text-center">
+        El usuario <span class="font-bold">ya</span> cuenta con un plan: <br>
+        <span class="text-aso-primary font-bold text-lg">Plan {{ "Amarillo" }}</span>
+      </p>
+
+      <fwb-button
+        color="red"
+        class="block mx-auto"
+        @click="useInfoUsuarioStore().$reset()"
+      >Volver</fwb-button>
+    </div>
+
+    <div v-if="! hasPlan" class="flex justify-center gap-3">
+      <fwb-button
+        color="red"
+        outline
+        @click="useInfoUsuarioStore().$reset()"
+      >Cancelar</fwb-button>
+      <fwb-button
+        color="yellow"
+        tag="router-link"
+        href="/plan"
+      >Siguiente</fwb-button>
     </div>
   </section>
 </template>
