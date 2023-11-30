@@ -19,10 +19,10 @@ const { state: infoPlan }= useInfoPlanStore()
 const { state: infoUsuario } = useInfoUsuarioStore()
 
 async function confirmado() {
-  const { error } = await useViewLoad()
-    .wrap(() => createPago( infoUsuario.id, infoPlan))
+  const { error, data } = await useViewLoad()
+    .wrap(() => createPago(infoUsuario.id, infoPlan))
 
-  if (error) {
+  if (error || data != true) {
     toast.error("Ha ocurrido un error!", { duration: 6000, position: "bottom" })
     return
   }

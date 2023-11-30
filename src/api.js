@@ -38,5 +38,16 @@ export async function fetchUser( doc ) {
 }
 
 export async function createPago(userId, info) {
+  // Por si se envia un soporte
+  if (! (info instanceof FormData)) {
+    let form_data = new FormData();
+
+    for (let key in info) {
+      form_data.append(key, info[key]);
+    }
+
+    info = form_data;
+  }
+
   return request(() => ax.post(`/${userId}/create-pago`, info))
 }
