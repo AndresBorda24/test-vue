@@ -8,7 +8,11 @@ export default defineConfig({
   plugins: [
     vue(),
   ],
-  // root: 'src',
+  esbuild: {
+    supported: {
+      'top-level-await': true
+    }
+  },
   build: {
     manifest: true,
     rollupOptions: {

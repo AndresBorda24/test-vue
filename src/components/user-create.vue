@@ -47,7 +47,7 @@ function cancel() {
     autocomplete="off"
     id="form-info-usuario"
     @submit.prevent="onSubmit"
-    class="bg-gray-50 px-10 py-7 border rounded shadow-xl flex flex-col gap-5 max-w-md mx-auto"
+    class="bg-gray-50 px-5 py-7 border rounded shadow-xl flex flex-col gap-5 max-w-lg mx-auto md:px-10"
   >
     <form-label val="Cédula">
       <fwb-input
@@ -108,7 +108,7 @@ function cancel() {
     </div>
 
     <div class="grid grid-cols-2 gap-4">
-      <form-label val="Teléfono (3########)">
+      <form-label val="Teléfono">
         <fwb-input
           v-model.trim="state.telefono"
           required
@@ -120,6 +120,10 @@ function cancel() {
         >
           <template #validationMessage v-if="errors.telefono">
             <span class="text-xs mt-15">{{ errors.telefono }}</span>
+          </template>
+
+          <template #helper>
+            <span class="text-xs">Formato: (3----------)</span>
           </template>
         </fwb-input>
       </form-label>

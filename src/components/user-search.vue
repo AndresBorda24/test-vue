@@ -36,7 +36,7 @@ function onError() {
     autocomplete="off"
     id="form-info-usuario"
     @submit.prevent="onSubmit"
-    class="bg-gray-50 px-10 py-7 border rounded shadow-xl flex flex-col gap-5 max-w-md mx-auto"
+    class="bg-gray-50 px-10 py-7 border rounded shadow-xl flex flex-col gap-5 mx-auto"
   >
     <form-label val="Cédula">
       <fwb-input

@@ -6,12 +6,12 @@ import PreLoader from "@/components/pre-loader.vue"
 
 <template>
   <Header />
-  <main class="max-w-4xl p-2 mx-auto py-8 grid gap-5">
+  <main class="max-w-3xl p-2 mx-auto py-8 md:grid gap-5">
     <section class="py-4">
       <Stepper />
     </section>
     <router-view v-slot="{ Component }">
-      <section class="relative py-4 min-h-[500px]">
+      <section class="relative py-4 px-2 min-h-[500px]">
         <PreLoader />
         <component :is="Component" />
       </section>

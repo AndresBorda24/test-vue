@@ -9,6 +9,9 @@ import { useInfoPlanStore } from "@/stores/InfoPlan"
 import { useInfoUsuarioStore } from "@/stores/InfoUsuario"
 import { FwbListGroup, FwbListGroupItem, FwbButton } from 'flowbite-vue'
 
+import UserIcon from "@/icons/user.vue"
+import PaymentIcon from "@/icons/payment.vue"
+
 const plan   = ref({})
 const toast  = useToast()
 const router = useRouter()
@@ -25,6 +28,7 @@ async function confirmado() {
   }
 
   toast.success("Pago Registrado!")
+  router.push({ name: 'finale' })
 }
 
 onMounted(() => {
@@ -38,38 +42,44 @@ onMounted(() => {
 
   <div class="bg-gray-50 px-8 py-6 border rounded shadow-md max-w-md mx-auto mb-10">
     <p class="text-aso-primary font-bold">Usuario:</p>
-    <fwb-list-group class="w-full">
-      <fwb-list-group-item class="flex gap-3">
-        <span class="font-bold">Nombre:</span>
-        <span class="capitalize">{{ infoUsuario.nom1 }} {{ infoUsuario.ape1 }}</span>
-      </fwb-list-group-item>
-      <fwb-list-group-item class="flex gap-3">
-        <span class="font-bold">Documento:</span>
-        <span>{{ infoUsuario.num_histo }}</span>
-      </fwb-list-group-item>
-    </fwb-list-group>
+    <div class="md:flex gap-3">
+      <UserIcon class="w-14 block mx-auto text-aso-tertiary"/>
+      <fwb-list-group class="w-full">
+        <fwb-list-group-item class="flex gap-3">
+          <span class="font-bold">Nombre:</span>
+          <span class="capitalize">{{ infoUsuario.nom1 }} {{ infoUsuario.ape1 }}</span>
+        </fwb-list-group-item>
+        <fwb-list-group-item class="flex gap-3">
+          <span class="font-bold">Documento:</span>
+          <span>{{ infoUsuario.num_histo }}</span>
+        </fwb-list-group-item>
+      </fwb-list-group>
+    </div>
 
     <hr class="my-6 border-gray-300">
 
     <p class="text-aso-primary font-bold">Plan:</p>
-    <fwb-list-group class="w-full mb-6">
-      <fwb-list-group-item class="flex gap-3">
-        <span class="font-bold">Nombre:</span>
-        <span class="capitalize">Plan {{ plan.nombre }}</span>
-      </fwb-list-group-item>
-      <fwb-list-group-item class="flex gap-3">
-        <span class="font-bold">Valor:</span>
-        <span class="capitalize">${{ plan.valor_formatted }}</span>
-      </fwb-list-group-item>
-      <fwb-list-group-item class="flex gap-3">
-        <span class="font-bold">Medio de Pago:</span>
-        <span class="capitalize">{{ infoPlan.medioPago }}</span>
-      </fwb-list-group-item>
-      <fwb-list-group-item class="flex gap-3">
-        <span class="font-bold">Referencia:</span>
-        <span>{{ infoPlan.referencia }}</span>
-      </fwb-list-group-item>
-    </fwb-list-group>
+    <div class="md:flex gap-3">
+      <PaymentIcon class="w-14 block mx-auto text-aso-tertiary"/>
+      <fwb-list-group class="w-full mb-6">
+        <fwb-list-group-item class="flex gap-3">
+          <span class="font-bold">Nombre:</span>
+          <span class="capitalize">Plan {{ plan.nombre }}</span>
+        </fwb-list-group-item>
+        <fwb-list-group-item class="flex gap-3">
+          <span class="font-bold">Valor:</span>
+          <span class="capitalize">${{ plan.valor_formatted }}</span>
+        </fwb-list-group-item>
+        <fwb-list-group-item class="flex gap-3">
+          <span class="font-bold">Medio de Pago:</span>
+          <span class="capitalize">{{ infoPlan.medioPago }}</span>
+        </fwb-list-group-item>
+        <fwb-list-group-item class="flex gap-3">
+          <span class="font-bold">Referencia:</span>
+          <span>{{ infoPlan.referencia }}</span>
+        </fwb-list-group-item>
+      </fwb-list-group>
+    </div>
 
     <div class="grid grid-cols-2 gap-3">
       <fwb-button

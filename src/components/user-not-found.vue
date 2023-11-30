@@ -14,7 +14,7 @@ function cancel() {
 </script>
 <template>
   <p class="text-xl text-aso-primary text-center font-bold">No Encontrado!</p>
-  <div class="bg-gray-50 px-10 py-7 border rounded shadow-xl max-w-md mx-auto flex flex-col gap-5 items-center">
+  <div class="bg-gray-50 px-10 py-7 border rounded shadow-xl mx-auto flex flex-col gap-5 items-center">
     <UserAlert class="w-28 text-aso-primary" />
     <p class="text-sm text-center">
       El usuario con el documento: <span class="font-bold">{{ state.num_histo }}</span> aún no ha sido creado.

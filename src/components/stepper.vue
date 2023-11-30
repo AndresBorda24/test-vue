@@ -31,7 +31,7 @@ const steps = ref([
     isReady: planReady
   }, {
     name: "Confirmación",
-    route: "info-confirmacion",
+    route: "confirmacion",
     isReady: confirmReady
   }, {
     name: "Finale",
@@ -42,19 +42,24 @@ const steps = ref([
 </script>
 
 <template>
-  <ol class="space-y-4 w-72 sticky top-3">
-    <li v-for="(step, index) in steps" :key="index">
+  <section class="relative md:sticky top-3 flex justify-center gap-3 flex-wrap md:flex-col">
+    <div v-for="(step, index) in steps" :key="index">
       <div
-        :class="['block w-full p-4 rounded-lg border shadow', {
+        :class="['block w-full p-2 rounded-lg border shadow min-w-[53px] md:p-3', {
           'text-blue-700 border-blue-300 bg-blue-50': route.name == step.route,
           'text-green-700 border-green-300 bg-green-50': step.isReady && (route.name != step.route),
           'text-gray-900 bg-gray-100 border border-gray-300': ! step.isReady && (route.name != step.route)
         }]"
         role="alert"
       >
-        <div class="flex items-center justify-between text-sm">
+        <div class="flex items-center justify-between text-sm gap-2">
           <span class="sr-only">{{ step.name }}</span>
-          <h3 class="font-medium">{{ `${index + 1}. ${step.name}` }}</h3>
+          <h3 class="font-medium">
+            <span class="inline-block">{{ index + 1 }}.</span>
+            <span :class="['text-center mb-2 absolute left-0 right-0 bottom-full md:ml-3 md:mb-0 md:static md:inline-block', {
+              'hidden': route.name != step.route
+            }]">{{ step.name }}</span>
+          </h3>
           <CheckOk
             class="w-4 h-4"
             v-if="step.isReady && route.name !== step.route"
@@ -65,6 +70,6 @@ const steps = ref([
           />
         </div>
       </div>
-    </li>
-  </ol>
+    </div>
+  </section>
 </template>

@@ -21,7 +21,7 @@ function cancel() {
 
 <template>
   <p class="text-xl text-aso-primary text-center font-bold">Usuario Registrado!</p>
-  <section class="bg-gray-50 px-10 py-7 border rounded shadow-xl max-w-md mx-auto">
+  <section class="bg-gray-50 px-10 py-7 border rounded shadow-xl mx-auto">
     <div class="flex flex-col gap-5 items-center mb-8">
       <UserIcon class="w-28 text-aso-primary" />
       <div class="flex-1 text-center">
