@@ -1,5 +1,6 @@
 import { routes } from "@/routes"
-import { useViewLoad } from "../stores/ViewLoad"
+import { useAuthStore } from "@/stores/Auth"
+import { useViewLoad } from "@/stores/ViewLoad"
 import { createRouter, createWebHistory } from 'vue-router'
 
 export function getRouter() {
@@ -9,8 +10,11 @@ export function getRouter() {
         routes
     })
 
-    router.beforeEach(() => {
+    router.beforeEach(async (to) => {
         viewLoad.setLoadingTrue()
+        if (to.matched.some(record => record.meta.requiresAuth)) {
+            if (! useAuthStore().session()) return { name: "unauthorized" }
+        }
     })
 
     router.afterEach(() => {

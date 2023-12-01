@@ -1,13 +1,16 @@
 <script setup>
 import { createPago } from "@/api"
+import { storeToRefs } from "pinia"
 import { onMounted, ref } from "vue"
 import { useRouter } from "vue-router"
+import { useToast } from 'vue-toast-notification'
+import { FwbListGroup, FwbListGroupItem, FwbButton } from 'flowbite-vue'
+
+import { useAuthStore } from "@/stores/Auth"
 import { useViewLoad } from "@/stores/ViewLoad"
 import { usePlanesStore } from "@/stores/Planes"
-import { useToast } from 'vue-toast-notification'
 import { useInfoPlanStore } from "@/stores/InfoPlan"
 import { useInfoUsuarioStore } from "@/stores/InfoUsuario"
-import { FwbListGroup, FwbListGroupItem, FwbButton } from 'flowbite-vue'
 
 import UserIcon from "@/icons/user.vue"
 import PaymentIcon from "@/icons/payment.vue"
@@ -15,6 +18,7 @@ import PaymentIcon from "@/icons/payment.vue"
 const plan   = ref({})
 const toast  = useToast()
 const router = useRouter()
+const { isLogged } = storeToRefs( useAuthStore() )
 const { state: infoPlan }= useInfoPlanStore()
 const { state: infoUsuario } = useInfoUsuarioStore()
 

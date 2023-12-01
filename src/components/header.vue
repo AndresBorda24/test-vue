@@ -1,7 +1,9 @@
 <script setup>
 import { storeToRefs } from "pinia";
 import { useAuthStore } from "@/stores/Auth"
+import { FwbButton } from 'flowbite-vue'
 
+const login = encodeURIComponent(import.meta.env.VITE_APP_URL);
 const { state: auth, isLogged } = storeToRefs( useAuthStore() )
 </script>
 
@@ -27,6 +29,12 @@ const { state: auth, isLogged } = storeToRefs( useAuthStore() )
           v-if="isLogged"
           class="text-xs font-bold"
         >{{ auth.name }}</span>
+        <fwb-button
+          v-else
+          size="xs"
+          gradient="red-yellow" outline
+          :href="`https://intranet.asotrauma.com.co/iniciosesion.php?ruta=${login}`"
+        >Hey! Debes Iniciar Sesión!</fwb-button>
       </div>
     </div>
   </header>
