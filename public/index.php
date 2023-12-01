@@ -1,15 +1,37 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro Usuarios Fidelización</title>
-  </head>
-  <body>
-    <div id="app" class="min-h-screen"></div>
-    <!-- si es desarrollo -->
-    <script type="module" src="http://localhost:5173/@vite/client"></script>
-    <script type="module" src="http://localhost:5173/src/main.js"></script>
-  </body>
-</html>
+<?php
+declare(strict_types=1);
+
+use \DI\Bridge\Slim\Bridge;
+use Slim\Views\PhpRenderer;
+use Slim\Routing\RouteCollectorProxy;
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+
+require __DIR__ . "/../vendor/autoload.php";
+
+/** Cargamos variables de entorno */
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ ."/..");
+$dotenv->load();
+
+/** Creacion del contenedor */
+$app = Bridge::create();
+
+$app->group("/api", function(RouteCollectorProxy $group) {
+  $group->get("/", [\App\Controllers\ApiController::class, "check"]);
+})->add(\App\Middleware\JsonBodyParserMiddleware::class);
+
+$app->get("/[{routes}]", function(Response $response) {
+  $renderer = new PhpRenderer(__DIR__);
+  return $renderer->render($response, "view.php");
+});
+
+$app->add(\App\Middleware\StartSessionMiddleware::class);
+
+/**
+ * Unos Middleware de Slim.
+ * El ErrorMiddleware debe siempre ser agregado al ultimo.
+ */
+$app->addRoutingMiddleware();
+$errorMiddleware = $app->addErrorMiddleware(true, false, false);
+
+$app->run();

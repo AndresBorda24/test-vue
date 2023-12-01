@@ -2,27 +2,41 @@ import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import laravel from 'laravel-vite-plugin';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
+    laravel({
+      input: 'src/main.js'
+    }),
+    vue({
+      template: {
+        transformAssetUrls: {
+          // The Vue plugin will re-write asset URLs, when referenced
+          // in Single File Components, to point to the Laravel web
+          // server. Setting this to `null` allows the Laravel plugin
+          // to instead re-write asset URLs to point to the Vite
+          // server instead.
+          base: null,
+
+          // The Vue plugin will parse absolute URLs and treat them
+          // as absolute paths to files on disk. Setting this to
+          // `false` will leave absolute URLs un-touched so they can
+          // reference assets in the public directory as expected.
+          includeAbsolute: false,
+        },
+      },
+    })
   ],
   esbuild: {
     supported: {
       'top-level-await': true
     }
   },
-  build: {
-    manifest: true,
-    rollupOptions: {
-      input: './src/main.js'
-    }
-  },
   server: {
     origin: 'http://localhost:5173',
   },
-  // envDir: './',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
