@@ -23,7 +23,7 @@ async function confirmado() {
     .wrap(() => createPago(infoUsuario.id, infoPlan))
 
   if (error || data != true) {
-    toast.error("Ha ocurrido un error!", { duration: 6000, position: "bottom" })
+    toast.error("Ha ocurrido un error!", { duration: 6000, position: 'bottom-right' })
     return
   }
 

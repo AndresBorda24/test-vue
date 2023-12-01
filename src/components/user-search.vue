@@ -26,7 +26,7 @@ async function onSubmit() {
 }
 
 function onError() {
-  toast.error("Ha ocurrido un error.", { position: "bottom" })
+  toast.error("Ha ocurrido un error.", { duration: 6000, position: 'bottom-right' })
   return false
 }
 </script>

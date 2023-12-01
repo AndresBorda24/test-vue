@@ -24,7 +24,7 @@ async function onSubmit() {
 }
 
 function onError( error ) {
-  toast.error("Ha ocurrido un error", { duration: 6000, position: 'bottom' })
+  toast.error("Ha ocurrido un error", { duration: 6000, position: 'bottom-right' })
   let e = error.response?.data?.fields || {}
 
   errors.value = Object.keys(e).reduce((a, field) => {

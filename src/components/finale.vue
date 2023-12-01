@@ -6,8 +6,6 @@ import { useInfoPlanStore } from "@/stores/InfoPlan"
 import { useInfoUsuarioStore } from "@/stores/InfoUsuario"
 
 const router = useRouter()
-const { state: infoPlan }= useInfoPlanStore()
-const { state: infoUsuario } = useInfoUsuarioStore()
 
 function volver() {
   useInfoPlanStore().$reset()

@@ -22,7 +22,11 @@ export const routes = [
     component: () => import("@/components/user-not-found.vue"),
     beforeEnter: () => {
       const { exists, state } = useInfoUsuarioStore()
-      if (exists || ! state.num_histo) {
+      if (exists) {
+        return { name: "user-found" }
+      }
+
+      if (! state.num_histo) {
         return { name: "search-user" }
       }
     }
@@ -63,12 +67,12 @@ export const routes = [
     name: "finale",
     component: () => import("@/components/finale.vue"),
     beforeEnter: () => {
-      // if (! useInfoUsuarioStore().ready ) {
-      //   return { name: "search-user" }
-      // }
-      // if (! useInfoPlanStore().ready ) {
-      //   return { name: "select-plan" }
-      // }
+      if (! useInfoUsuarioStore().ready ) {
+        return { name: "search-user" }
+      }
+      if (! useInfoPlanStore().ready ) {
+        return { name: "select-plan" }
+      }
     }
   },
   {
