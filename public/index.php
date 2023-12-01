@@ -5,7 +5,6 @@ use \DI\Bridge\Slim\Bridge;
 use Slim\Views\PhpRenderer;
 use Slim\Routing\RouteCollectorProxy;
 use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
 
 require __DIR__ . "/../vendor/autoload.php";
 
@@ -15,9 +14,10 @@ $dotenv->load();
 
 /** Creacion del contenedor */
 $app = Bridge::create();
+$app->setBasePath($_ENV["APP_BASE"]);
 
 $app->group("/api", function(RouteCollectorProxy $group) {
-  $group->get("/", [\App\Controllers\ApiController::class, "check"]);
+  $group->get("/check", [\App\Controllers\ApiController::class, "check"]);
 })->add(\App\Middleware\JsonBodyParserMiddleware::class);
 
 $app->get("/[{routes}]", function(Response $response) {

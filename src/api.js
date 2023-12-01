@@ -1,4 +1,4 @@
-import { ax } from "@/lib/axios"
+import { ax, axLocal } from "@/lib/axios"
 
 async function request( req ) {
   let _data  = null
@@ -50,4 +50,8 @@ export async function createPago(userId, info) {
   }
 
   return request(() => ax.post(`/${userId}/create-pago`, info))
+}
+
+export async function authPull() {
+  return request(() => axLocal.get(`/check`))
 }

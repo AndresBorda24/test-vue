@@ -49,8 +49,7 @@ export const routes = [
         return { name: "search-user" }
       }
     }
-  },
-  {
+  }, {
     path: '/confirmacion',
     name: "confirmacion",
     component: () => import("@/components/confirmacion.vue"),
@@ -74,8 +73,13 @@ export const routes = [
         return { name: "select-plan" }
       }
     }
-  },
-  {
+  }, {
+    path: '/no-autorizado',
+    name: "unauthorized",
+    component: () => import("@/components/unauthorized.vue"),
+    beforeEnter: () => {
+    }
+  }, {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: () => import("@/components/not-found.vue")
