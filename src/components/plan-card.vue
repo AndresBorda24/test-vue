@@ -9,7 +9,7 @@ const props = defineProps({
 
 <template>
   <div
-    :class="['block max-w-sm p-6 rounded-lg shadow-lg transition-colors duration-150', {
+    :class="['flex flex-col justify-center text-center h-full p-6 rounded-lg shadow-lg transition-colors duration-150', {
       'bg-white border-gray-200 hover:bg-gray-100': ! selected,
       'bg-teal-800 border-teal-400 hover:bg-teal-700': selected
     }]"

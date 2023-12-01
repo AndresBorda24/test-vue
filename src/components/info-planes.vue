@@ -1,4 +1,5 @@
 <script setup>
+import { storeToRefs } from "pinia"
 import { useRouter } from "vue-router"
 import { usePlanesStore } from "@/stores/Planes"
 import { useInfoPlanStore } from "@/stores/InfoPlan"
@@ -14,7 +15,7 @@ import CardIcon from "@/icons/card.vue"
 
 const router = useRouter()
 const { state }  = useInfoPlanStore()
-const { planes } = usePlanesStore()
+const { planes } = storeToRefs( usePlanesStore() )
 const mediosDePago = {
   "Nequi": NequiIcon,
   "Efectivo": CashIcon,
@@ -39,11 +40,11 @@ function volver() {
     @submit.prevent="onSubmit"
     class="max-w-2xl mx-auto py-7"
   >
-    <div class="flex gap-3 justify-center mb-5">
+    <div class="flex flex-wrap gap-3 justify-center mb-5">
       <label
         v-for="plan in planes" :key="plan.id"
         :for="`plan${plan.id}`"
-        class="cursor-pointer relative"
+        class="cursor-pointer relative flex-1"
       >
         <input
           required
