@@ -16,17 +16,25 @@ $dotenv->load();
 $app = Bridge::create();
 $app->setBasePath($_ENV["APP_BASE"]);
 
+// Se ponen primero las rutas de la 'Api' para que no se solapen con la ultima ruta
 $app->group("/api", function(RouteCollectorProxy $group) {
   $group->get("/check", [\App\Controllers\ApiController::class, "check"]);
 })->add(\App\Middleware\JsonBodyParserMiddleware::class);
 
+
+// Como lo que se construyo es un SPA no nos importa mucho la uri, eso lo maneja JS
 $app->get("/[{routes}]", function(Response $response) {
   $renderer = new PhpRenderer(__DIR__);
-  return $renderer->render($response, "view.php");
+  // Aqui se cargan los links de los archivos JS y CSS
+  $files = json_decode(file_get_contents(__DIR__."/build/manifest.json"), true);
+
+  return $renderer->render($response, "view.php", [
+    "files" => $files
+  ]);
 });
 
-$app->add(\App\Middleware\StartSessionMiddleware::class);
 
+$app->add(\App\Middleware\StartSessionMiddleware::class);
 /**
  * Unos Middleware de Slim.
  * El ErrorMiddleware debe siempre ser agregado al ultimo.

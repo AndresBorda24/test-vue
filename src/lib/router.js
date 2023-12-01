@@ -6,8 +6,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 export function getRouter() {
     const viewLoad = useViewLoad()
     const router   = createRouter({
-        history: createWebHistory(),
-        routes
+        history: createWebHistory(import.meta.env.VITE_APP_BASE),
+        routes,
     })
 
     router.beforeEach(async (to) => {

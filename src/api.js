@@ -37,19 +37,16 @@ export async function fetchUser( doc ) {
   return request(() => ax.get(`/${doc}/fetch`))
 }
 
-export async function createPago(userId, info) {
+export async function createPago(userId, info, quien) {
   // Por si se envia un soporte
-  if (! (info instanceof FormData)) {
-    let form_data = new FormData();
+  let data = new FormData();
 
-    for (let key in info) {
-      form_data.append(key, info[key]);
-    }
-
-    info = form_data;
+  for (let key in info) {
+    data.append(key, info[key]);
   }
+  data.append("quien", quien)
 
-  return request(() => ax.post(`/${userId}/create-pago`, info))
+  return request(() => ax.post(`/${userId}/create-pago`, data))
 }
 
 export async function authPull() {

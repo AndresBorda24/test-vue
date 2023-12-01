@@ -18,13 +18,13 @@ import PaymentIcon from "@/icons/payment.vue"
 const plan   = ref({})
 const toast  = useToast()
 const router = useRouter()
-const { isLogged } = storeToRefs( useAuthStore() )
+const { state: auth } = storeToRefs( useAuthStore() )
 const { state: infoPlan }= useInfoPlanStore()
 const { state: infoUsuario } = useInfoUsuarioStore()
 
 async function confirmado() {
   const { error, data } = await useViewLoad()
-    .wrap(() => createPago(infoUsuario.id, infoPlan))
+    .wrap(() => createPago(infoUsuario.id, infoPlan, auth.value.id))
 
   if (error || data != true) {
     toast.error("Ha ocurrido un error!", { duration: 6000, position: 'bottom-right' })
