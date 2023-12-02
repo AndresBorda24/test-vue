@@ -4,7 +4,7 @@ import { storeToRefs } from "pinia"
 import { onMounted, ref } from "vue"
 import { useRouter } from "vue-router"
 import { useToast } from 'vue-toast-notification'
-import { FwbListGroup, FwbListGroupItem, FwbButton } from 'flowbite-vue'
+import { FwbButton } from 'flowbite-vue'
 
 import { useAuthStore } from "@/stores/Auth"
 import { useViewLoad } from "@/stores/ViewLoad"
@@ -46,43 +46,50 @@ onMounted(() => {
 
   <div class="bg-gray-50 px-8 py-6 border rounded shadow-md max-w-md mx-auto mb-10">
     <p class="text-aso-primary font-bold">Usuario:</p>
-    <div class="md:flex gap-3">
+    <div class="md:flex items-center gap-3">
       <UserIcon class="w-14 block mx-auto text-aso-tertiary"/>
-      <fwb-list-group class="w-full">
-        <fwb-list-group-item class="flex gap-3">
+      <div class="flex flex-1 text-sm flex-col">
+        <div class="flex gap-2 p-1">
           <span class="font-bold">Nombre:</span>
           <span class="capitalize">{{ infoUsuario.nom1 }} {{ infoUsuario.ape1 }}</span>
-        </fwb-list-group-item>
-        <fwb-list-group-item class="flex gap-3">
+        </div>
+        <div class="flex gap-2 p-1">
           <span class="font-bold">Documento:</span>
           <span>{{ infoUsuario.num_histo }}</span>
-        </fwb-list-group-item>
-      </fwb-list-group>
+        </div>
+      </div>
     </div>
 
     <hr class="my-6 border-gray-300">
 
     <p class="text-aso-primary font-bold">Plan:</p>
-    <div class="md:flex gap-3">
+    <div class="md:flex gap-3 mb-6">
       <PaymentIcon class="w-14 block mx-auto text-aso-tertiary"/>
-      <fwb-list-group class="w-full mb-6">
-        <fwb-list-group-item class="flex gap-3">
-          <span class="font-bold">Nombre:</span>
-          <span class="capitalize">Plan {{ plan.nombre }}</span>
-        </fwb-list-group-item>
-        <fwb-list-group-item class="flex gap-3">
+      <div class="flex flex-1 text-sm flex-col">
+        <div class="flex gap-2 p-1">
           <span class="font-bold">Valor:</span>
           <span class="capitalize">${{ plan.valor_formatted }}</span>
-        </fwb-list-group-item>
-        <fwb-list-group-item class="flex gap-3">
+        </div>
+        <div class="flex gap-2 p-1">
+          <span class="font-bold">Nombre:</span>
+          <span class="capitalize">Plan {{ plan.nombre }}</span>
+        </div>
+        <div class="flex gap-2 p-1">
           <span class="font-bold">Medio de Pago:</span>
           <span class="capitalize">{{ infoPlan.medioPago }}</span>
-        </fwb-list-group-item>
-        <fwb-list-group-item class="flex gap-3">
+        </div>
+        <div class="flex gap-2 p-1">
           <span class="font-bold">Referencia:</span>
           <span>{{ infoPlan.referencia }}</span>
-        </fwb-list-group-item>
-      </fwb-list-group>
+        </div>
+        <div
+          v-if="Boolean(infoPlan.soporte)"
+          class="flex gap-2 p-1"
+        >
+          <span class="font-bold">Soporte:</span>
+          <span>{{ infoPlan.soporte.name }}</span>
+        </div>
+      </div>
     </div>
 
     <div class="grid grid-cols-2 gap-3">
