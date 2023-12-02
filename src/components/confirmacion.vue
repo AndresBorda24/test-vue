@@ -88,13 +88,12 @@ onMounted(() => {
     <div class="grid grid-cols-2 gap-3">
       <fwb-button
         color="dark"
-        tag="router-link"
         class="text-center"
-        :href="router.resolve({ name: 'select-plan' }).href"
+        @click="router.push({ name: 'select-plan' })"
       >Volver</fwb-button>
       <fwb-button
-        @click="confirmado"
         color="green"
+        @click="confirmado"
       >Confirmar!</fwb-button>
     </div>
   </div>

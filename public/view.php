@@ -9,7 +9,7 @@
       <link
         rel="stylesheet"
         type="text/css"
-        href="/build/<?= $files["src/main.css"]["file"] ?>"
+        href="<?= $_ENV["APP_BASE"] ?>/build/<?= $files["src/main.css"]["file"] ?>"
       >
     <?php endif ?>
   </head>
@@ -19,7 +19,7 @@
       <script type="module" src="http://localhost:5173/@vite/client"></script>
       <script type="module" src="http://localhost:5173/src/main.js"></script>
     <?php else: ?>
-      <script type="module" src="/build/<?= $files["src/main.js"]["file"] ?>"></script>
+      <script type="module" src="<?= $_ENV["APP_BASE"] ?>/build/<?= $files["src/main.js"]["file"] ?>"></script>
     <?php endif ?>
   </body>
 </html>

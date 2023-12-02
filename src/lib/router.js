@@ -13,7 +13,7 @@ export function getRouter() {
     router.beforeEach(async (to) => {
         viewLoad.setLoadingTrue()
         if (to.matched.some(record => record.meta.requiresAuth)) {
-            if (! useAuthStore().session()) return { name: "unauthorized" }
+            if (! await useAuthStore().session()) return { name: "unauthorized" }
         }
     })
 
