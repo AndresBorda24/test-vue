@@ -1,4 +1,5 @@
 <script setup>
+import { watch, ref } from "vue"
 import { storeToRefs } from "pinia"
 import { useRouter } from "vue-router"
 import { usePlanesStore } from "@/stores/Planes"
@@ -14,7 +15,8 @@ import CashIcon from "@/icons/cash.vue"
 import CardIcon from "@/icons/card.vue"
 
 const router = useRouter()
-const { state }  = useInfoPlanStore()
+const fileError = ref(false)
+const { state }  = storeToRefs( useInfoPlanStore() )
 const { planes } = storeToRefs( usePlanesStore() )
 const mediosDePago = {
   "Nequi": NequiIcon,
@@ -22,14 +24,21 @@ const mediosDePago = {
   "Tarjeta": CardIcon
 }
 
-function onSubmit() {
-  router.push({ name: 'confirmacion' })
-}
+const onSubmit = () => router.push({ name: 'confirmacion' })
+
 
 function volver() {
   useInfoPlanStore().$reset()
   router.push({ name: 'user-found' })
 }
+
+watch(() => state.value.soporte, () => {
+  fileError.value = false
+  if (state.value.soporte === null) return
+
+  let sizeMb = state.value.soporte.size / 1024 / 1000
+  if (sizeMb >= 5) fileError.value = true
+})
 </script>
 
 <template>
@@ -97,9 +106,38 @@ function volver() {
         />
       </form-label>
 
-      <form-label val="Soporte">
-        <fwb-file-input id="file-drop" v-model="state.soporte" dropzone />
-      </form-label>
+      <div>
+        <form-label val="Soporte">
+          <fwb-file-input id="file-drop" v-model="state.soporte" dropzone />
+          <p class="p-2">
+            <span class="font-bold">Nota:</span>
+            El archivo seleccionado no debe superar las 5 MB
+          </p>
+
+          <p
+            v-if="Boolean(state.soporte) && fileError"
+            class="text-red-500 text-xs p-2"
+          >
+            <span class="font-bold">Error:</span>
+            El peso del archivo seleccionado es de
+            {{
+              state.soporte
+              ? Math.floor(state.soporte.size /1024/1000)
+              : ''
+            }}
+             MB
+          </p>
+        </form-label>
+        <fwb-button
+          outline
+          size="xs"
+          color="red"
+          type="button"
+          class="block ml-auto"
+          v-if="Boolean(state.soporte)"
+          @click="state.soporte = null"
+        >Limpiar archivo</fwb-button>
+      </div>
 
 
       <div class="grid grid-cols-2 gap-3">
@@ -113,6 +151,7 @@ function volver() {
         <fwb-button
           type="submit"
           color="yellow"
+          :disabled="fileError"
         >Siguiente</fwb-button>
       </div>
     </div>
