@@ -18,7 +18,8 @@ async function onSubmit() {
 
   if (error) return onError()
 
-  if (data !== null) useInfoUsuarioStore().setInfo( data );
+  if (data !== null) useInfoUsuarioStore().setInfo( data )
+  else state.value.clave = state.value.num_histo;
 
   (exists.value)
     ? router.push({ name: 'user-found' })

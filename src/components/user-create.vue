@@ -172,6 +172,7 @@ function cancel() {
         required
         size="sm"
         name="clave"
+        disabled
         placeholder="Requerido"
       />
     </form-label>
