@@ -5,14 +5,12 @@ import { useRouter } from "vue-router"
 import { usePlanesStore } from "@/stores/Planes"
 import { useInfoPlanStore } from "@/stores/InfoPlan"
 
-import PlanCard from "@/components/plan-card.vue"
-import FormLabel from "@/components/form-label.vue"
 import { FwbInput, FwbFileInput, FwbButton } from 'flowbite-vue'
 
 // Icons xD
-import NequiIcon from "@/icons/nequi.vue"
-import CashIcon from "@/icons/cash.vue"
-import CardIcon from "@/icons/card.vue"
+import NequiIcon from "@/icons/nequi-icon.vue"
+import CashIcon from "@/icons/cash-icon.vue"
+import CardIcon from "@/icons/card-icon.vue"
 
 const router = useRouter()
 const fileError = ref(false)
@@ -25,7 +23,6 @@ const mediosDePago = {
 }
 
 const onSubmit = () => router.push({ name: 'confirmacion' })
-
 
 function volver() {
   useInfoPlanStore().$reset()

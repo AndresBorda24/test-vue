@@ -4,8 +4,6 @@ import { storeToRefs } from "pinia"
 import { FwbButton } from 'flowbite-vue'
 import { useInfoUsuarioStore } from "@/stores/InfoUsuario"
 
-import UserIcon from "@/icons/user.vue"
-
 const router = useRouter()
 const { state, hasPlan, plan, planExpira } = storeToRefs(useInfoUsuarioStore())
 const formatter = new Intl.DateTimeFormat('es-CO', {
@@ -56,7 +54,7 @@ function cancel() {
       <fwb-button
         color="yellow"
         tag="router-link"
-        href="/plan"
+        :href="{ name: 'select-plan' }"
       >Siguiente</fwb-button>
     </div>
   </section>

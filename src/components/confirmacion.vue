@@ -12,9 +12,6 @@ import { usePlanesStore } from "@/stores/Planes"
 import { useInfoPlanStore } from "@/stores/InfoPlan"
 import { useInfoUsuarioStore } from "@/stores/InfoUsuario"
 
-import UserIcon from "@/icons/user.vue"
-import PaymentIcon from "@/icons/payment.vue"
-
 const plan   = ref({})
 const toast  = useToast()
 const router = useRouter()

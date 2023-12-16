@@ -1,5 +1,4 @@
 <script setup>
-import LockIcon from "@/icons/lock.vue"
 import { FwbButton } from 'flowbite-vue'
 
 const login = encodeURIComponent(import.meta.env.VITE_APP_URL);
