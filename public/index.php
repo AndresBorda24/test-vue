@@ -23,7 +23,7 @@ $app->group("/api", function(RouteCollectorProxy $group) {
 
 
 // Como lo que se construyo es un SPA no nos importa mucho la uri, eso lo maneja JS
-$app->get("/[{routes}]", function(Response $response) {
+$app->get("/[{routes:.*}]", function(Response $response) {
   $renderer = new PhpRenderer(__DIR__);
   // Aqui se cargan los links de los archivos JS y CSS
   $files = json_decode(file_get_contents(__DIR__."/build/manifest.json"), true);
