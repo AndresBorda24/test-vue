@@ -1,40 +1,58 @@
 <script setup>
-import { storeToRefs } from "pinia";
-import { useAuthStore } from "@/stores/Auth"
+import { storeToRefs } from "pinia"
+import { useRoute } from "vue-router"
 import { FwbButton } from 'flowbite-vue'
+import { useAuthStore } from "@/stores/Auth"
+import { useInfoUsuarioStore } from "@/stores/InfoUsuario"
 
-const login = encodeURIComponent(import.meta.env.VITE_APP_URL);
+const route = useRoute()
+const logo = import.meta.env.VITE_APP_URL + "logo-blanco.png"
+const login = encodeURIComponent(import.meta.env.VITE_APP_URL)
 const { state: auth, isLogged } = storeToRefs( useAuthStore() )
+
 </script>
 
 <template>
   <header class="bg-aso-secondary">
     <div class="max-w-5xl mx-auto p-3 flex justify-between items-center">
-      <span class="text-white text-xl">Programa de Fidelización</span>
-      <a
-        target="_blank"
-        href="https://intranet.asotrauma.com.co/indexloginadmin.php"
-      >
-        <img
-          src="https://asotrauma.com.co/wp-content/uploads/2021/09/Asotrauma-logo-w.svg"
-          alt="Logo Asotrauma"
-          class="max-w-[110px] block"
-        >
-      </a>
+      <span class="flex items-center gap-3">
+        <a href="https://intranet.asotrauma.com.co/indexloginadmin.php" >
+          <img
+            :src="logo"
+            class="max-w-[35px] block"
+            alt="Logo Asotrauma Blanco"
+          >
+        </a>
+        <div class="border border-white"></div>
+        <span class="text-white text-lg md:text-xl">Programa de Fidelización</span>
+      </span>
+
+      <span
+        v-if="isLogged"
+        class="text-xs font-bold text-white"
+      >{{ auth.name }}</span>
+      <fwb-button
+        v-else
+        size="xs"
+        gradient="red-yellow" outline
+        :href="`https://intranet.asotrauma.com.co/iniciosesion.php?ruta=${login}`"
+      >Hey! Debes Iniciar Sesión!</fwb-button>
     </div>
-    <div class=" bg-aso-primary p-2 text-center text-white">
+
+    <div class="bg-aso-primary p-2 text-center text-white">
       <div class="flex justify-between items-center gap-3 max-w-lg mx-auto">
-        <span>Registro de Usuarios</span>
-        <span
-          v-if="isLogged"
-          class="text-xs font-bold"
-        >{{ auth.name }}</span>
-        <fwb-button
-          v-else
-          size="xs"
-          gradient="red-yellow" outline
-          :href="`https://intranet.asotrauma.com.co/iniciosesion.php?ruta=${login}`"
-        >Hey! Debes Iniciar Sesión!</fwb-button>
+        <router-link
+          :to="{ name: 'search-user' }"
+          @click="useInfoUsuarioStore().$reset()"
+          :class="['hover:text-yellow-300 text-sm', {
+            'text-yellow-300 underline': route.matched[0].name == 'registro-routes'
+          }]"
+        >Registro</router-link>
+
+        <router-link
+          :to="{ name: 'finale' }"
+          :class="['hover:text-yellow-300 text-sm']"
+        >Listado de Pagos</router-link>
       </div>
     </div>
   </header>

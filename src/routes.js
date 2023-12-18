@@ -6,6 +6,7 @@ export const routes = [
   {
     path: '/registro',
     component: () => import("@/views/registro-view.vue"),
+    name: "registro-routes",
     children: registroRoutes
   },
   {
