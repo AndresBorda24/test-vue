@@ -18,12 +18,12 @@ const { state: auth, isLogged } = storeToRefs( useAuthStore() )
         <a href="https://intranet.asotrauma.com.co/indexloginadmin.php" >
           <img
             :src="logo"
-            class="max-w-[35px] block"
+            class="max-w-[30px] block"
             alt="Logo Asotrauma Blanco"
           >
         </a>
         <div class="border border-white"></div>
-        <span class="text-white text-lg md:text-xl">Programa de Fidelización</span>
+        <span class="text-white text-md md:text-lg">Programa de Fidelización</span>
       </span>
 
       <span
