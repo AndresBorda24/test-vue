@@ -1,4 +1,3 @@
-
 import { registroRoutes } from "@/routes/registro-routes"
 
 
@@ -8,6 +7,12 @@ export const routes = [
     component: () => import("@/views/registro-view.vue"),
     name: "registro-routes",
     children: registroRoutes
+  },
+  {
+    path: '/listado-pagos',
+    component: () => import("@/views/listado-pagos-view.vue"),
+    meta: { requiresAuth: true },
+    name: 'listado-pagos'
   },
   {
     path: '/no-autorizado',

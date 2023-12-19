@@ -9,7 +9,6 @@ const route = useRoute()
 const logo = import.meta.env.VITE_APP_URL + "logo-blanco.png"
 const login = encodeURIComponent(import.meta.env.VITE_APP_URL)
 const { state: auth, isLogged } = storeToRefs( useAuthStore() )
-
 </script>
 
 <template>
@@ -40,18 +39,25 @@ const { state: auth, isLogged } = storeToRefs( useAuthStore() )
     </div>
 
     <div class="bg-aso-primary p-2 text-center text-white">
-      <div class="flex justify-between items-center gap-3 max-w-lg mx-auto">
+      <div class="flex justify-center items-center gap-3 max-w-lg mx-auto">
         <router-link
           :to="{ name: 'search-user' }"
           @click="useInfoUsuarioStore().$reset()"
           :class="['hover:text-yellow-300 text-sm', {
-            'text-yellow-300 underline': route.matched[0].name == 'registro-routes'
+            'text-yellow-300 underline': (
+                route.matched[0]
+                && route.matched[0].name == 'registro-routes'
+              )
           }]"
         >Registro</router-link>
 
+        <div class="border border-white"></div>
+
         <router-link
-          :to="{ name: 'finale' }"
-          :class="['hover:text-yellow-300 text-sm']"
+          :to="{ name: 'listado-pagos' }"
+          :class="['hover:text-yellow-300 text-sm', {
+            'text-yellow-300 underline': route.name == 'listado-pagos'
+          }]"
         >Listado de Pagos</router-link>
       </div>
     </div>
