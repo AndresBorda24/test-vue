@@ -37,6 +37,7 @@ const setRegistradoVal = async (id, val) => {
 <template>
   <fwb-table hoverable class="max-h-[500px] overflow-y-scroll">
     <fwb-table-head class="sticky top-0">
+      <fwb-table-head-cell></fwb-table-head-cell>
       <fwb-table-head-cell>#</fwb-table-head-cell>
       <fwb-table-head-cell class="max-w-[70px] !px-2">Registrado</fwb-table-head-cell>
       <fwb-table-head-cell>Tipo</fwb-table-head-cell>
@@ -44,12 +45,18 @@ const setRegistradoVal = async (id, val) => {
       <fwb-table-head-cell>Cliente</fwb-table-head-cell>
       <fwb-table-head-cell>Fecha Pago</fwb-table-head-cell>
       <fwb-table-head-cell>Detalle</fwb-table-head-cell>
-      <fwb-table-head-cell></fwb-table-head-cell>
     </fwb-table-head>
 
     <fwb-table-body class="text-xs">
       <template v-for="pago in pagos" :key="pago.id">
         <fwb-table-row :class="detailId === pago.id && '!border-b-0 !bg-gray-50'">
+          <fwb-table-cell class="!p-0">
+            <button @click="setDetailId(pago.id)" class="px-3 py-2">
+              <ChevronDownIcon :class="['w-4 h-4 transition-transform duration-100', {
+                'rotate-180': detailId === pago.id
+              }]" />
+            </button>
+          </fwb-table-cell>
           <fwb-table-cell>{{ pago.id }}</fwb-table-cell>
           <fwb-table-cell>
             <fwb-checkbox
@@ -61,14 +68,13 @@ const setRegistradoVal = async (id, val) => {
           <fwb-table-cell>{{ pago.valor_pagado }}</fwb-table-cell>
           <fwb-table-cell>{{ pago.cliente_nombre }}</fwb-table-cell>
           <fwb-table-cell class="whitespace-nowrap">{{ pago.created_at }}</fwb-table-cell>
-          <fwb-table-cell>{{ pago.detail }}</fwb-table-cell>
-          <fwb-table-cell> <button @click="setDetailId(pago.id)">#</button> </fwb-table-cell>
+          <fwb-table-cell class="whitespace-nowrap">{{ pago.detail }}</fwb-table-cell>
         </fwb-table-row>
 
         <Transition name="slide-up">
           <fwb-table-row v-if="detailId === pago.id">
-            <fwb-table-cell colspan="7" class="bg-gray-50">
-              <div class="text-left grid grid-cols-3 justify-items-center">
+            <fwb-table-cell colspan="8" class="bg-gray-50">
+              <div class="text-left grid gap-3 grid-cols-3 justify-items-center max-w-[700px] lg:mx-auto">
                 <div>
                   <span class="font-bold text-md">Información del Cliente</span>
                   <ul class="list-disc">
