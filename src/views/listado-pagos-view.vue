@@ -1,12 +1,15 @@
 <script setup>
 import { getPagosList } from "@/api"
-import { onMounted, ref } from "vue"
+import { onMounted, ref, computed } from "vue"
 import { useViewLoad } from "@/stores/ViewLoad"
 import { FwbInput, FwbButton } from 'flowbite-vue'
 
 const pagos = ref([])
 const hasta = ref(null)
 const desde = ref(null)
+const excelLink = computed(() =>
+  `${import.meta.env.VITE_API_EXTERNAL}/pagos-excel?desde=${desde.value}&hasta=${hasta.value}`
+)
 
 // Busca y carga la info de los pagos
 const getPagosData = async () => {
@@ -47,6 +50,15 @@ onMounted(async () => await getPagosData())
         color="default" pill square
         @click="getPagosData"
       > <ArrowRightIcon class="w-4 h-4"/> </fwb-button>
+
+      <fwb-button
+        :href="excelLink"
+        title="Cargar Pagos"
+        color="green" pill
+      >
+        <template #prefix> <ExcelIcon class="w-5 h-5" /> </template>
+        Excel
+      </fwb-button>
     </div>
     <tabla-pagos :pagos="pagos" />
   </main>

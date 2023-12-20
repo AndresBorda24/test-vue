@@ -118,7 +118,7 @@ const setRegistradoVal = async (id, val) => {
 
 .slide-up-leave-to {
   opacity: 0;
-  transform: translateY(20px);
-  transition: all 0ms ease-out;
+  transform: translateY(10px);
+  transition: all 100ms ease-out;
 }
 </style>
