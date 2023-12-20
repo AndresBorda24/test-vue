@@ -20,7 +20,8 @@ class ApiController
         if ($_ENV["APP_ENV"] !== "prod") {
             return $this->responseJson($response, [
                 "id" => 617,
-                "name" => "Andrés Borda"
+                "name" => "Andrés Borda",
+                "area" => 20
             ]);
         }
 
@@ -31,7 +32,8 @@ class ApiController
 
         return $this->responseJson($response, [
             "id" => $userId,
-            "name" => $this->session->get('usu_nombre')
+            "name" => $this->session->get('usu_nombre'),
+            "area" => $this->session->get('usu_area')
         ]);
     }
 
