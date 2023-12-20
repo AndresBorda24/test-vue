@@ -22,6 +22,10 @@ const toast = useToast()
 const detailId = ref(0)
 // Nos ayuda a identificar el item que esta "expandido"
 const setDetailId = (id) => detailId.value = (detailId.value === id) ? 0 : id
+// Abre una ventana emergente con el soporte.
+const verSoporte = (soporte) => window.open(
+    import.meta.env.VITE_API_EXTERNAL+`/soporte/${soporte}`,
+    'winname','directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=400,height=350');
 
 // Realiza la solicitud y establece el pago como registrado
 const setRegistradoVal = async (id, val) => {
@@ -37,6 +41,7 @@ const setRegistradoVal = async (id, val) => {
       <fwb-table-head-cell class="max-w-[70px] !px-2">Registrado</fwb-table-head-cell>
       <fwb-table-head-cell>Tipo</fwb-table-head-cell>
       <fwb-table-head-cell>Valor</fwb-table-head-cell>
+      <fwb-table-head-cell>Cliente</fwb-table-head-cell>
       <fwb-table-head-cell>Fecha Pago</fwb-table-head-cell>
       <fwb-table-head-cell>Detalle</fwb-table-head-cell>
       <fwb-table-head-cell></fwb-table-head-cell>
@@ -54,6 +59,7 @@ const setRegistradoVal = async (id, val) => {
           </fwb-table-cell>
           <fwb-table-cell>{{ pago.type }}</fwb-table-cell>
           <fwb-table-cell>{{ pago.valor_pagado }}</fwb-table-cell>
+          <fwb-table-cell>{{ pago.cliente_nombre }}</fwb-table-cell>
           <fwb-table-cell class="whitespace-nowrap">{{ pago.created_at }}</fwb-table-cell>
           <fwb-table-cell>{{ pago.detail }}</fwb-table-cell>
           <fwb-table-cell> <button @click="setDetailId(pago.id)">#</button> </fwb-table-cell>
@@ -86,6 +92,7 @@ const setRegistradoVal = async (id, val) => {
                   <span class="font-bold text-md">Soporte del Detalle</span>
                   <FileIcon
                     v-if="pago.soporte"
+                    @click="verSoporte(pago.soporte)"
                     class="w-12 h-12 text-aso-secondary block mx-auto"
                   />
                 </div>

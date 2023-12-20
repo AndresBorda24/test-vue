@@ -25,8 +25,8 @@ onMounted(async () => await getPagosData())
 <template>
   <main class="max-w-5xl p-2 mx-auto py-8">
     <pre-loader />
-    <h1 class="text-aso-primary text-4xl mb-4">Listado de pagos</h1>
-    <p>Carga los pagos realizados entre este rango de fechas:</p>
+    <h1 class="text-aso-primary text-3xl mb-4">Listado de pagos</h1>
+    <p class="text-sm">Carga los pagos realizados entre este rango de fechas:</p>
     <div class="mb-4 flex flex-wrap gap-3 p-3 items-center">
       <FormLabel val="Desde">
         <fwb-input
