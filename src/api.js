@@ -59,6 +59,10 @@ export async function getPagosList(desde, hasta) {
   }));
 }
 
+export async function searchFidelizado(cc, $tipo) {
+  return request(() => ax.get(`/${cc}/search-fidelizado/${$tipo}`));
+}
+
 export async function setRegistrado(id, registrado) {
   return request(() => ax.post(`/${id}/set-registrado`, { registrado }));
 }
