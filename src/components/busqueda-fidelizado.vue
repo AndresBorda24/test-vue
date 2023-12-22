@@ -30,7 +30,11 @@ const search = async () => {
   )
   if (error) return toast.error("Error al realizar la búsqueda");
 
-  emit("fetched", data);
+  emit("fetched", {
+    data: data,
+    // Esto es para evitar reactividad ~_~
+    busqueda: JSON.parse(JSON.stringify(busqueda.value))
+  });
 }
 
 // Cuando se selecciona un tipo de busqueda diferente, hace el focus automatico.
