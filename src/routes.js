@@ -4,6 +4,10 @@ import { registroRoutes } from "@/routes/registro-routes"
 
 export const routes = [
   {
+    path: '/',
+    redirect: '/registro'
+  },
+  {
     path: '/registro',
     component: () => import("@/views/registro-view.vue"),
     name: "registro-routes",
