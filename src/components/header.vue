@@ -63,7 +63,7 @@ const { state: auth, isLogged } = storeToRefs( useAuthStore() )
         <div class="border border-white"></div>
 
         <router-link
-          :to="{ name: 'listado-pagos' }"
+          :to="{ name: 'buscar-fidelizado' }"
           :class="['hover:text-yellow-300 text-sm', {
             'text-yellow-300 underline': route.name == 'buscar-fidelizado'
           }]"
