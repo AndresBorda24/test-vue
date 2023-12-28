@@ -1,7 +1,6 @@
 <script setup>
 import { useRouter } from "vue-router";
 import { FwbButton } from "flowbite-vue";
-import PaymentIcon from "@/icons/payment.vue"
 import { useInfoPlanStore } from "@/stores/InfoPlan"
 import { useInfoUsuarioStore } from "@/stores/InfoUsuario"
 

@@ -52,3 +52,17 @@ export async function createPago(userId, info, quien) {
 export async function authPull() {
   return request(() => axLocal.get(`/check`))
 }
+
+export async function getPagosList(desde, hasta) {
+  return request(() => ax.get("/pagos-list", {
+    params: { desde, hasta }
+  }));
+}
+
+export async function searchFidelizado(cc, $tipo) {
+  return request(() => ax.get(`/${cc}/search-fidelizado/${$tipo}`));
+}
+
+export async function setRegistrado(id, registrado) {
+  return request(() => ax.post(`/${id}/set-registrado`, { registrado }));
+}

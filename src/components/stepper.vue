@@ -3,9 +3,6 @@ import { ref, computed } from "vue"
 import { storeToRefs } from "pinia"
 import { useRoute } from "vue-router"
 
-import CheckOk from "@/icons/check-ok.vue"
-import ArrowRight from "@/icons/arrow-right.vue"
-
 import { useInfoPlanStore } from "@/stores/InfoPlan"
 import { useInfoUsuarioStore } from "@/stores/InfoUsuario"
 
@@ -60,11 +57,11 @@ const steps = ref([
               'hidden': route.name != step.route
             }]">{{ step.name }}</span>
           </h3>
-          <CheckOk
+          <CheckOkIcon
             class="w-4 h-4"
             v-if="step.isReady && route.name !== step.route"
           />
-          <ArrowRight
+          <ArrowRightIcon
             class="w-4 h-4"
             v-else-if="route.name === step.route"
           />

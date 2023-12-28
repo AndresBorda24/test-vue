@@ -5,7 +5,7 @@
     <link rel="icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro Usuarios Fidelización</title>
-    <?php if ($_ENV["APP_ENV"] == "prod"): ?>
+    <?php if ($_ENV["APP_ENV"] !== "dev"): ?>
       <link
         rel="stylesheet"
         type="text/css"
@@ -15,7 +15,7 @@
   </head>
   <body>
     <div id="app" class="min-h-screen"></div>
-    <?php if ($_ENV["APP_ENV"] !== "prod"): ?>
+    <?php if ($_ENV["APP_ENV"] == "dev"): ?>
       <script type="module" src="http://localhost:5173/@vite/client"></script>
       <script type="module" src="http://localhost:5173/src/main.js"></script>
     <?php else: ?>
