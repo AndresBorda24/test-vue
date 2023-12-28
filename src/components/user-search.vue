@@ -1,4 +1,5 @@
 <script setup>
+import { onMounted } from "vue"
 import { fetchUser } from "@/api"
 import { storeToRefs } from "pinia"
 import { useRouter } from "vue-router"
@@ -30,6 +31,11 @@ function onError() {
   toast.error("Ha ocurrido un error.", { duration: 6000, position: 'bottom-right' })
   return false
 }
+
+onMounted(() => setTimeout(() =>
+    document.querySelector('input[name="num_histo"]')?.focus()
+  , 10)
+)
 </script>
 
 <template>

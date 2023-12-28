@@ -1,9 +1,9 @@
 <script setup>
-import { ref, watch } from "vue"
 import { searchFidelizado } from "@/api"
+import { ref, watch, onMounted } from "vue"
 import { useViewLoad } from "@/stores/ViewLoad"
-import { FwbButton, FwbInput, FwbRadio } from 'flowbite-vue'
 import { useToast } from 'vue-toast-notification'
+import { FwbButton, FwbInput, FwbRadio } from 'flowbite-vue'
 
 const toast = useToast()
 const emit = defineEmits(["fetched"])
@@ -39,6 +39,7 @@ const search = async () => {
 
 // Cuando se selecciona un tipo de busqueda diferente, hace el focus automatico.
 watch(() => busqueda.value.tipo, () => setFocus())
+onMounted(() => setTimeout(setFocus, 10))
 </script>
 
 <template>

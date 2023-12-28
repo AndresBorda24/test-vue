@@ -31,7 +31,7 @@ function volver() {
 
 watch(() => state.value.soporte, () => {
   fileError.value = false
-  if (state.value.soporte === null) return
+  if (state.value.soporte === null || ! Boolean(state.value.soporte)) return
 
   let sizeMb = state.value.soporte.size / 1024 / 1000
   if (sizeMb >= 5) fileError.value = true

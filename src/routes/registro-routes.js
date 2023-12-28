@@ -6,6 +6,10 @@ export const registroRoutes = [
         path: '',
         name: "search-user",
         component: () => import("@/components/user-search.vue"),
+        beforeEnter: () => {
+            useInfoPlanStore().$reset()
+            useInfoUsuarioStore().$reset()
+        }
     },
     {
         path: 'usuario',

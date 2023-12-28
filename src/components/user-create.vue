@@ -1,6 +1,6 @@
 <script setup>
-import { ref } from "vue"
 import { createUser } from "@/api"
+import { ref, onMounted } from "vue"
 import { useRouter } from "vue-router"
 import { useViewLoad } from "@/stores/ViewLoad"
 import { useToast } from 'vue-toast-notification'
@@ -39,6 +39,11 @@ function cancel() {
   useInfoUsuarioStore().$reset()
   router.push({ name: "search-user" })
 }
+
+onMounted(() => setTimeout(() =>
+    document.querySelector('input[name="nom1"]')?.focus()
+  , 10)
+)
 </script>
 
 <template>
@@ -71,7 +76,6 @@ function cancel() {
         <fwb-input
           v-model.trim="state.nom1"
           required
-          autofocus
           size="sm"
           name="nom1"
           placeholder="Requerido"
