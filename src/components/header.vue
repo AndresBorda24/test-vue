@@ -4,6 +4,7 @@ import { useRoute } from "vue-router"
 import { FwbButton } from 'flowbite-vue'
 import { useAuthStore } from "@/stores/Auth"
 import { useInfoUsuarioStore } from "@/stores/InfoUsuario"
+import { SISTEMAS, TESORERIA, ADMISIONES } from "@/areas"
 
 const route = useRoute()
 const logo = import.meta.env.VITE_APP_URL + "logo-blanco.png"
@@ -44,6 +45,7 @@ const { state: auth, isLogged } = storeToRefs( useAuthStore() )
         class="flex justify-center items-center gap-3 max-w-lg mx-auto"
       >
         <router-link
+          header-link
           :to="{ name: 'search-user' }"
           @click="useInfoUsuarioStore().$reset()"
           :class="['hover:text-yellow-300 text-sm', {
@@ -54,18 +56,18 @@ const { state: auth, isLogged } = storeToRefs( useAuthStore() )
           }]"
         >Registro</router-link>
 
-        <div class="border border-white"></div>
 
         <router-link
+          header-link
+          v-if="[SISTEMAS, TESORERIA].includes(auth.area)"
           :to="{ name: 'listado-pagos' }"
           :class="['hover:text-yellow-300 text-sm', {
             'text-yellow-300 underline': route.name == 'listado-pagos'
           }]"
         >Listado de Pagos</router-link>
 
-        <div class="border border-white"></div>
-
         <router-link
+          header-link
           :to="{ name: 'buscar-fidelizado' }"
           :class="['hover:text-yellow-300 text-sm', {
             'text-yellow-300 underline': route.name == 'buscar-fidelizado'
@@ -77,3 +79,16 @@ const { state: auth, isLogged } = storeToRefs( useAuthStore() )
     </div>
   </header>
 </template>
+
+<style scoped>
+  [header-link] {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  [header-link]:not(:first-child)::before {
+    content: '';
+    border-radius: 100%;
+    border: 1px solid #fff;
+  }
+</style>
