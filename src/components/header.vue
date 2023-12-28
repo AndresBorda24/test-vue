@@ -39,7 +39,10 @@ const { state: auth, isLogged } = storeToRefs( useAuthStore() )
     </div>
 
     <div class="bg-aso-primary p-2 text-center text-white">
-      <div class="flex justify-center items-center gap-3 max-w-lg mx-auto">
+      <div
+        v-if="isLogged"
+        class="flex justify-center items-center gap-3 max-w-lg mx-auto"
+      >
         <router-link
           :to="{ name: 'search-user' }"
           @click="useInfoUsuarioStore().$reset()"
@@ -69,6 +72,8 @@ const { state: auth, isLogged } = storeToRefs( useAuthStore() )
           }]"
         >Buscar Fidelizado</router-link>
       </div>
+
+      <LockIcon v-else fill="currentColor" class="w-6 h-6 mx-auto" />
     </div>
   </header>
 </template>
