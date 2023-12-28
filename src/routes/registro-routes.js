@@ -5,13 +5,11 @@ export const registroRoutes = [
     {
         path: '',
         name: "search-user",
-        meta: { requiresAuth: true },
         component: () => import("@/components/user-search.vue"),
     },
     {
         path: 'usuario',
         name: "create-usuario",
-        meta: { requiresAuth: true },
         component: () => import("@/components/user-create.vue"),
         beforeEnter: () => {
             const { state } = useInfoUsuarioStore()
@@ -21,7 +19,6 @@ export const registroRoutes = [
     {
         path: 'usuario-no-encontrado',
         name: "user-not-found",
-        meta: { requiresAuth: true },
         component: () => import("@/components/user-not-found.vue"),
         beforeEnter: () => {
             const { exists, state } = useInfoUsuarioStore()
@@ -32,7 +29,6 @@ export const registroRoutes = [
     {
         path: 'usuario-encontrado',
         name: "user-found",
-        meta: { requiresAuth: true },
         component: () => import("@/components/user-info.vue"),
         beforeEnter: () => {
             const { exists } = useInfoUsuarioStore()
@@ -44,7 +40,6 @@ export const registroRoutes = [
     {
         path: 'plan',
         name: "select-plan",
-        meta: { requiresAuth: true },
         component: () => import("@/components/info-planes.vue"),
         beforeEnter: () => {
             if (!useInfoUsuarioStore().ready) return { name: "search-user" }
@@ -53,7 +48,6 @@ export const registroRoutes = [
     {
         path: 'confirmacion',
         name: "confirmacion",
-        meta: { requiresAuth: true },
         component: () => import("@/components/confirmacion.vue"),
         beforeEnter: () => {
             if (!useInfoUsuarioStore().ready) return { name: "search-user" }

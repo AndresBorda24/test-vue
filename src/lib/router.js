@@ -13,13 +13,23 @@ export function getRouter() {
     router.beforeEach(async (to) => {
         viewLoad.setLoadingTrue()
         if (to.matched.some(record => record.meta.requiresAuth)) {
-            if (! await useAuthStore().session()) return { name: "unauthorized" }
+            if (! await useAuthStore().session())
+                return { name: "unauthorized" }
         }
+
+        const requiredArea = to.matched.some(record => {
+            const areas = record.meta.requiresAreas
+            if (! areas || ! Array.isArray(areas)) return false
+
+            if (! areas.includes(useAuthStore().state.area)) return true
+
+            return false
+        })
+
+        if (requiredArea) return { name: "unauthorized" }
     })
 
-    router.afterEach(() => {
-        viewLoad.setLoadingFalse()
-    })
+    router.afterEach(() => viewLoad.setLoadingFalse())
 
     return router
 }

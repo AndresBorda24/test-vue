@@ -1,6 +1,5 @@
-import { useAuthStore } from "@/stores/Auth"
 import { registroRoutes } from "@/routes/registro-routes"
-
+import { SISTEMAS, TESORERIA, ADMISIONES } from "@/areas"
 
 export const routes = [
   {
@@ -11,33 +10,33 @@ export const routes = [
     path: '/registro',
     component: () => import("@/views/registro-view.vue"),
     name: "registro-routes",
+    meta: {
+      requiresAuth: true,
+      requiresAreas: [
+        SISTEMAS, TESORERIA, ADMISIONES
+      ]
+    },
     children: registroRoutes
   },
   {
     path: '/listado-pagos',
     component: () => import("@/views/listado-pagos-view.vue"),
-    meta: { requiresAuth: true },
-    beforeEnter: () => {
-      const { state } = useAuthStore();
-
-      // Aqui estan los id de las areas permitidas para ver la tabla
-      if (! [20, 24, 16].includes(state.area)) {
-        return { name: "unauthorized" }
-      }
+    meta: {
+      requiresAuth: true,
+      requiresAreas: [
+        SISTEMAS, TESORERIA
+      ]
     },
     name: 'listado-pagos'
   },
   {
     path: '/buscar-fidelizado',
     component: () => import("@/views/buscar-fidelizado-view.vue"),
-    meta: { requiresAuth: true },
-    beforeEnter: () => {
-      const { state } = useAuthStore();
-
-      // Aqui estan los id de las areas permitidas para ver la tabla
-      if (! [20, 24, 16].includes(state.area)) {
-        return { name: "unauthorized" }
-      }
+    meta: {
+      requiresAuth: true,
+      requiresAreas: [
+        SISTEMAS, TESORERIA, ADMISIONES
+      ]
     },
     name: 'buscar-fidelizado'
   },
