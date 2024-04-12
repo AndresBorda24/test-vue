@@ -11,6 +11,7 @@ import { FwbInput, FwbFileInput, FwbButton } from 'flowbite-vue'
 import NequiIcon from "@/icons/nequi-icon.vue"
 import CashIcon from "@/icons/cash-icon.vue"
 import CardIcon from "@/icons/card-icon.vue"
+import GouIcon from "@/icons/gou-icon.vue"
 
 const router = useRouter()
 const fileError = ref(false)
@@ -19,7 +20,8 @@ const { planes } = storeToRefs( usePlanesStore() )
 const mediosDePago = {
   "Nequi": NequiIcon,
   "Efectivo": CashIcon,
-  "Tarjeta": CardIcon
+  "Tarjeta": CardIcon,
+  "Micrositio Gou": GouIcon
 }
 
 const onSubmit = () => router.push({ name: 'confirmacion' })
@@ -67,7 +69,7 @@ watch(() => state.value.soporte, () => {
 
     <div class="bg-gray-50 px-10 py-7 border rounded shadow-xl flex flex-col gap-5 max-w-md mx-auto">
       <span class="text-gray-500 text-xs">Medio de Pago</span>
-      <div class="flex gap-3 justify-center">
+      <div class="flex flex-wrap gap-3 justify-center">
         <label
           v-for="(value, key) in mediosDePago" :key="key"
           :for="`medioPago${key}`"
@@ -82,9 +84,9 @@ watch(() => state.value.soporte, () => {
             :id="`medioPago${key}`"
             v-model="state.medioPago"
           >
-          <div :class="['p-3 border text-center rounded shadow-lg text-sm ', {
+          <div :class="['p-3 border text-center rounded shadow-lg text-sm', {
             'bg-white hover:bg-teal-100': state.medioPago !== key,
-            'bg-teal-800 text-teal-100 hover:bg-teal-700': state.medioPago === key,
+            'bg-teal-800 text-teal-100 hover:bg-teal-700 [&_img.img-as-icon]:invert': state.medioPago === key,
           }]">
             <span class="block w-12 mx-auto"><component :is="value"/></span>
             {{ key }}

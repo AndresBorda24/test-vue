@@ -23,7 +23,7 @@ async function confirmado() {
   const { error, data } = await useViewLoad()
     .wrap(() => createPago(infoUsuario.id, {
       ... infoPlan,
-      id: infoUsuarioPlan?.id
+      id: infoUsuarioPlan?.id || ""
     }, auth.value.id))
 
   if (error || data != true) {
