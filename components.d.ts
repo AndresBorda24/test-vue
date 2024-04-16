@@ -23,7 +23,6 @@ declare module 'vue' {
     Finale: typeof import('./src/components/finale.vue')['default']
     FormLabel: typeof import('./src/components/form-label.vue')['default']
     GouIcon: typeof import('./src/icons/gou-icon.vue')['default']
-    GowIcon: typeof import('./src/icons/gow-icon.vue')['default']
     Header: typeof import('./src/components/header.vue')['default']
     InfoPlanes: typeof import('./src/components/info-planes.vue')['default']
     ListadoPagosView: typeof import('./src/views/listado-pagos-view.vue')['default']

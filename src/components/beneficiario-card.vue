@@ -11,6 +11,17 @@ const props = defineProps({
     default: "B"
   }
 })
+
+function getNombre( data ) {
+  return (Boolean(data.nombre))
+    ? data.nombre
+    : [
+      data.nom1,
+      data.nom2,
+      data.ape1,
+      data.ape2
+    ].filter(i => i !== null).join(" ");
+}
 </script>
 
 <template>
@@ -29,7 +40,7 @@ const props = defineProps({
         <template #prefix> <user-icon class="h-4 w-4"/> </template>
         <div class="px-2">
           <span class="text-xs text-gray-500 block">Nombre:</span>
-          <span class="block">{{ data.nombre }}</span>
+          <span class="block">{{ getNombre( data ) }}</span>
         </div>
       </fwb-list-group-item>
       <fwb-list-group-item v-if="tipo === 'B'">
