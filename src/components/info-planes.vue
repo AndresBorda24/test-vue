@@ -12,6 +12,7 @@ import NequiIcon from "@/icons/nequi-icon.vue"
 import CashIcon from "@/icons/cash-icon.vue"
 import CardIcon from "@/icons/card-icon.vue"
 import GouIcon from "@/icons/gou-icon.vue"
+import NominaIcon from "@/icons/nomina.vue"
 
 const router = useRouter()
 const fileError = ref(false)
@@ -21,6 +22,7 @@ const mediosDePago = {
   "Nequi": NequiIcon,
   "Efectivo": CashIcon,
   "Tarjeta": CardIcon,
+  "Nómina": NominaIcon,
   "Micrositio Gou": GouIcon
 }
 
@@ -69,7 +71,7 @@ watch(() => state.value.soporte, () => {
 
     <div class="bg-gray-50 px-10 py-7 border rounded shadow-xl flex flex-col gap-5 max-w-md mx-auto">
       <span class="text-gray-500 text-xs">Medio de Pago</span>
-      <div class="flex flex-wrap gap-3 justify-center">
+      <div class="flex flex-wrap gap-3 justify-center items-center">
         <label
           v-for="(value, key) in mediosDePago" :key="key"
           :for="`medioPago${key}`"

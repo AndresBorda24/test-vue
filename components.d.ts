@@ -29,6 +29,7 @@ declare module 'vue' {
     LockIcon: typeof import('./src/icons/lock-icon.vue')['default']
     NequiIcon: typeof import('./src/icons/nequi-icon.vue')['default']
     NoIdIcon: typeof import('./src/icons/no-id-icon.vue')['default']
+    Nomina: typeof import('./src/icons/nomina.vue')['default']
     PaymentIcon: typeof import('./src/icons/payment-icon.vue')['default']
     PlanCard: typeof import('./src/components/plan-card.vue')['default']
     PreLoader: typeof import('./src/components/pre-loader.vue')['default']
