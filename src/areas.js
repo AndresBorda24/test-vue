@@ -3,8 +3,10 @@ const TESORERIA = 25
 const ADMISIONES = 21
 const FACTURACION = 16
 const CONTABILIDAD = 24
+const RX = 26
 
 export {
+    RX,
     SISTEMAS,
     TESORERIA,
     ADMISIONES,

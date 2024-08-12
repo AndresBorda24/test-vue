@@ -1,5 +1,5 @@
 import { registroRoutes } from "@/routes/registro-routes"
-import { SISTEMAS, TESORERIA, ADMISIONES } from "@/areas"
+import { SISTEMAS, TESORERIA, ADMISIONES, RX } from "@/areas"
 
 export const routes = [
   {
@@ -35,7 +35,7 @@ export const routes = [
     meta: {
       requiresAuth: true,
       requiresAreas: [
-        SISTEMAS, TESORERIA, ADMISIONES
+        SISTEMAS, TESORERIA, ADMISIONES, RX
       ]
     },
     name: 'buscar-fidelizado'
