@@ -45,6 +45,7 @@ const { state: auth, isLogged } = storeToRefs( useAuthStore() )
         class="flex justify-center items-center gap-3 max-w-lg mx-auto"
       >
         <router-link
+          v-if="[SISTEMAS, TESORERIA, ADMISIONES].includes(auth.area)"
           header-link
           :to="{ name: 'search-user' }"
           @click="useInfoUsuarioStore().$reset()"

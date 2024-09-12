@@ -1,5 +1,5 @@
 import { registroRoutes } from "@/routes/registro-routes"
-import { SISTEMAS, TESORERIA, ADMISIONES, RX } from "@/areas"
+import { SISTEMAS, TESORERIA, ADMISIONES } from "@/areas"
 
 export const routes = [
   {
@@ -33,10 +33,10 @@ export const routes = [
     path: '/buscar-fidelizado',
     component: () => import("@/views/buscar-fidelizado-view.vue"),
     meta: {
-      requiresAuth: true,
-      requiresAreas: [
-        SISTEMAS, TESORERIA, ADMISIONES, RX
-      ]
+      // requiresAuth: true,
+      // requiresAreas: [
+        // SISTEMAS, TESORERIA, ADMISIONES, RX
+      // ]
     },
     name: 'buscar-fidelizado'
   },
