@@ -33,7 +33,7 @@ export const routes = [
     path: '/buscar-fidelizado',
     component: () => import("@/views/buscar-fidelizado-view.vue"),
     meta: {
-      // requiresAuth: true,
+      requiresAuth: true,
       // requiresAreas: [
         // SISTEMAS, TESORERIA, ADMISIONES, RX
       // ]

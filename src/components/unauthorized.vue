@@ -1,9 +1,13 @@
 <script setup>
 import { FwbButton } from 'flowbite-vue'
 import { useAuthStore } from "@/stores/Auth"
+import { useRoute } from 'vue-router';
 
 const Auth = useAuthStore();
-const login = encodeURIComponent(import.meta.env.VITE_APP_URL);
+const { redirectedFrom } = useRoute();
+const path = redirectedFrom ? redirectedFrom.fullPath : '/buscar-fidelizado';
+const loginUrl = `${import.meta.env.VITE_APP_URL}${path.replace('/', '')}`;
+const login = encodeURIComponent(loginUrl);
 </script>
 
 <template>
