@@ -30,6 +30,16 @@ export const routes = [
     name: 'listado-pagos'
   },
   {
+    path: '/buscar-orden',
+    component: () => import("@/views/buscar-orden.vue"),
+    meta: {
+      requiresAuth: true,
+      requiresAreas: [
+        SISTEMAS, TESORERIA
+      ]
+    },
+    name: 'buscar-orden'
+  },  {
     path: '/buscar-fidelizado',
     component: () => import("@/views/buscar-fidelizado-view.vue"),
     meta: {

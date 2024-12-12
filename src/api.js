@@ -59,6 +59,10 @@ export async function getPagosList(desde, hasta) {
   }));
 }
 
+export async function getOrderInfo(orderId) {
+  return request(() => ax.get(`/${orderId}/order-info`));
+}
+
 export async function searchFidelizado(cc, $tipo) {
   return request(() => ax.get(`/${cc}/search-fidelizado/${$tipo}`));
 }

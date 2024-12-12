@@ -68,6 +68,15 @@ const { state: auth, isLogged } = storeToRefs( useAuthStore() )
         >Listado de Pagos</router-link>
 
         <router-link
+          v-if="[SISTEMAS, TESORERIA].includes(auth.area)"
+          header-link
+          :to="{ name: 'buscar-orden' }"
+          :class="['hover:text-yellow-300 text-sm', {
+            'text-yellow-300 underline': route.name == 'buscar-orden'
+          }]"
+        >Información Pago</router-link>
+
+        <router-link
           header-link
           :to="{ name: 'buscar-fidelizado' }"
           :class="['hover:text-yellow-300 text-sm', {
