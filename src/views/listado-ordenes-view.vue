@@ -4,11 +4,15 @@ import { onMounted, ref, computed } from "vue"
 import { useViewLoad } from "@/stores/ViewLoad"
 import { FwbInput, FwbButton } from 'flowbite-vue'
 import TablaOrdenes from "../components/tabla-ordenes.vue"
+import ExcelIcon from '../icons/excel-icon.vue'
 
 const orders = ref([])
 const hasta = ref(null)
 const desde = ref(null)
 
+const excelLink = computed(() =>
+  `${import.meta.env.VITE_API_EXTERNAL}/2/orders-excel?desde=${desde.value}&hasta=${hasta.value}`
+);
 // Busca y carga la info de los pagos
 const getOrdersData = async () => {
   console.log('Entrando en el evento submit')
@@ -39,6 +43,15 @@ onMounted(async () => await getOrdersData());
       </FormLabel>
       <fwb-button title="Cargar Pagos" color="default" pill square type="submit">
         <ArrowRightIcon class="w-4 h-4" />
+      </fwb-button>
+
+      <fwb-button
+        title="Guardar como excel"
+        color="green" pill
+        :href="excelLink"
+      >
+        <template #prefix> <ExcelIcon class="w-5 h-5" /> </template>
+        Excel
       </fwb-button>
     </form>
 
