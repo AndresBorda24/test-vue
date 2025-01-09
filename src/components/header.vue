@@ -74,7 +74,7 @@ const { state: auth, isLogged } = storeToRefs( useAuthStore() )
           :class="['hover:text-yellow-300 text-sm', {
             'text-yellow-300 underline': route.name == 'buscar-orden'
           }]"
-        >Información Pago</router-link>
+        >Listado de Ordenes</router-link>
 
         <router-link
           header-link

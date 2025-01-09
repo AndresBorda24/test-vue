@@ -11,6 +11,7 @@ const desde = ref(null)
 
 // Busca y carga la info de los pagos
 const getOrdersData = async () => {
+  console.log('Entrando en el evento submit')
   const { data } = await useViewLoad().wrap(
     () => getOrderList(desde.value, hasta.value)
   )
@@ -29,7 +30,7 @@ onMounted(async () => await getOrdersData());
     <h1 class="text-aso-primary text-3xl mb-4">Listado de Ordenes</h1>
     <p class="text-sm">Carga las ordenes <b>(<span class="italic">no fidelización</span>)</b> realizados entre este rango de fechas:
     </p>
-    <form @submit.prevent="getPagosData" class="mb-4 flex flex-wrap gap-3 p-3 items-center">
+    <form @submit.prevent="getOrdersData" class="mb-4 flex flex-wrap gap-3 p-3 items-center">
       <FormLabel val="Desde">
         <fwb-input size="sm" type="date" v-model="desde" />
       </FormLabel>
