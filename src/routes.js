@@ -1,5 +1,6 @@
+import { ADMISIONES, SISTEMAS, TESORERIA } from "@/areas"
+
 import { registroRoutes } from "@/routes/registro-routes"
-import { SISTEMAS, TESORERIA, ADMISIONES } from "@/areas"
 
 export const routes = [
   {
@@ -31,7 +32,7 @@ export const routes = [
   },
   {
     path: '/buscar-orden',
-    component: () => import("@/views/buscar-orden.vue"),
+    component: () => import("@/views/listado-ordenes-view.vue"),
     meta: {
       requiresAuth: true,
       requiresAreas: [

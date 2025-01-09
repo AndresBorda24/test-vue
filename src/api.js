@@ -70,3 +70,11 @@ export async function searchFidelizado(cc, $tipo) {
 export async function setRegistrado(id, registrado) {
   return request(() => ax.post(`/${id}/set-registrado`, { registrado }));
 }
+
+// 2 hace referencia al tipo de orden, siendo el 2 para los Certificados de No
+// Atencion
+export async function getOrderList(desde = null, hasta = null, type = 2) {
+  return request(() => ax.get(`/${type}/order-list`, {
+    params: { desde, hasta }
+  }))
+}
