@@ -40,10 +40,10 @@ function cancel() {
   router.push({ name: "search-user" })
 }
 
-onMounted(() => setTimeout(() =>
-    document.querySelector('input[name="nom1"]')?.focus()
-  , 10)
-)
+onMounted(() => setTimeout(() => {
+  state.tipo_documento = "CC";
+  document.querySelector('input[name="nom1"]')?.focus();
+}, 10))
 </script>
 
 <template>
@@ -54,22 +54,39 @@ onMounted(() => setTimeout(() =>
     @submit.prevent="onSubmit"
     class="bg-gray-50 px-5 py-7 border rounded shadow-xl flex flex-col gap-5 max-w-lg mx-auto md:px-10"
   >
-    <form-label val="Cédula">
-      <fwb-input
-        required
-        size="sm"
-        minlength="4"
-        name="num_histo"
-        disabled
-        v-model.trim="state.num_histo"
-        :validation-status="errors.num_histo && 'error'"
-        placeholder="xxxxxxxx"
-      >
-        <template #validationMessage v-if="errors.num_histo">
-          <span class="text-xs mt-15">{{ errors.num_histo }}</span>
-        </template>
-      </fwb-input>
-    </form-label>
+    <div class="grid grid-cols-2 gap-4">
+      <form-label val="Tipo Documento">
+        <select
+          required
+          name="tipo_documento"
+          v-model="state.tipo_documento"
+          class="w-full text-gray-900 bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 p-2.5 text-sm border border-gray-300 rounded-lg"
+        >
+          <option hidden selected>Selecciona</option>
+          <option value="CC">Cédula</option>
+          <option value="TI">Tarjeta de identidad</option>
+          <option value="CE">Cédula de extranjería</option>
+        </select>
+      </form-label>
+
+      <form-label val="Cédula">
+        <fwb-input
+          required
+          size="sm"
+          minlength="4"
+          name="num_histo"
+          disabled
+          v-model.trim="state.num_histo"
+          :validation-status="errors.num_histo && 'error'"
+          placeholder="xxxxxxxx"
+        >
+          <template #validationMessage v-if="errors.num_histo">
+            <span class="text-xs mt-15">{{ errors.num_histo }}</span>
+          </template>
+        </fwb-input>
+      </form-label>
+    </div>
+
 
     <div class="grid grid-cols-2 gap-4">
       <form-label val="Primer Nombre">
